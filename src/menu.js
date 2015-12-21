@@ -7,10 +7,10 @@ export default class Menu {
 
   render() {
     // add first option
-    context.text(50, 50, '1. Start Game');
+    context.text(1, 1, '1. Start Game');
 
     // add second option
-    context.text(50, 100, '2. Join Game');
+    context.text(1, 2, '2. Join Game');
 
     context.cursor.restore();
   }

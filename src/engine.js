@@ -1,4 +1,5 @@
 import Menu from './menu';
+import context from 'axel';
 
 const gameStates = {
   menu: 'Menu',
@@ -23,6 +24,8 @@ export default class Engine {
 
   tick() {
     // check game state to determine what to do.
+    context.clear();
     this.menu.render();
+    while(true) { }
   }
 }
