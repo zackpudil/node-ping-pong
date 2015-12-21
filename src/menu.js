@@ -1,8 +1,10 @@
 import context from 'axel';
+import userInput from './user-input';
 
 export default class Menu {
+
   constructor() {
-    
+    userInput.addListener({ name: '1'}, () => context.text(1, 3, 'Starting game...'));
   }
 
   render() {
@@ -17,12 +19,5 @@ export default class Menu {
 
   update() {
     // return start or ip address or null
-  }
-
-  checkInput(ch, key) {
-    // if key is enter, check if value is 1 or 2
-    // if 1 start, if 2 get ip address
-    console.log(ch, key);
-    //context.text(1, 3, 'fuck');
   }
 }

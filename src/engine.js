@@ -1,17 +1,19 @@
 import Menu from './menu';
 import context from 'axel';
-import keypress from 'keypress';
+import userInput from './user-input';
 
 const gameStates = {
   menu: 'Menu',
   play: 'Play'
 };
+
 const Interval = 100;
 
 export default class Engine {
 
   constructor() {
     // start game state as the menu
+    debugger;
     this.gameState = gameStates.menu;
 
     // start tick
@@ -19,11 +21,7 @@ export default class Engine {
   }
 
   start() {
-    process.stdin.setRawMode(true);
-    keypress(process.stdin);
-
-    process.stdin.resume();
-    process.stdin.on('keypress', this.menu.checkInput); 
+    userInput.addListener({ name: 'c', ctrl: true, shift: false}, process.exit);
     // this.gameLoop = setInterval(this.tick, Interval);
     this.tick();
   }
