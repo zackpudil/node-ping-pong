@@ -1,5 +1,6 @@
 import Menu from './menu';
 import context from 'axel';
+import keypress from 'keypress';
 
 const gameStates = {
   menu: 'Menu',
@@ -18,6 +19,11 @@ export default class Engine {
   }
 
   start() {
+    process.stdin.setRawMode(true);
+    keypress(process.stdin);
+
+    process.stdin.resume();
+    process.stdin.on('keypress', this.menu.checkInput); 
     // this.gameLoop = setInterval(this.tick, Interval);
     this.tick();
   }
@@ -26,6 +32,5 @@ export default class Engine {
     // check game state to determine what to do.
     context.clear();
     this.menu.render();
-    while(true) { }
   }
 }

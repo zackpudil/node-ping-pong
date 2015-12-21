@@ -2,7 +2,7 @@ import context from 'axel';
 
 export default class Menu {
   constructor() {
-    process.stdin.on('keypress', this.checkInput);
+    
   }
 
   render() {
@@ -22,5 +22,7 @@ export default class Menu {
   checkInput(ch, key) {
     // if key is enter, check if value is 1 or 2
     // if 1 start, if 2 get ip address
+    console.log(ch, key);
+    //context.text(1, 3, 'fuck');
   }
 }

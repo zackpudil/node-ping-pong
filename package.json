@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axel": "0.0.3"
+    "axel": "0.0.3",
+    "keypress": "^0.2.1"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
