@@ -1,0 +1,14 @@
+{
+  "name": "node-ping-pong",
+  "version": "0.0.0",
+  "description": "A multiplayer ping-pong game written with Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axel": "0.0.3"
+  }
+}
