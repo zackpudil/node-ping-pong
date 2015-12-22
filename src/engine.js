@@ -10,7 +10,7 @@ const gameStates = {
   play: 'Play'
 };
 
-const Interval = 0.1;
+const Interval = 70;
 
 export default class Engine {
 
@@ -30,7 +30,10 @@ export default class Engine {
       this.renderer.bg(0, 0, 0);
       this.renderer.fg(255, 255, 255);
 
-      this.gameLoop = null;
+      this.renderer.clear();
+      this.renderer.reset();
+
+      clearInterval(this.gameLoop);
 
       process.exit();
     });
