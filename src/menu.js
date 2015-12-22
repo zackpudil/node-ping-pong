@@ -8,18 +8,22 @@ export default class Menu {
     this.renderer = new Renderer();
     this.modelRenderer = new ModelRenderer();
 
-    userInput.addListener({ name: '1'}, () =>  {
+    userInput.addListener({ name: '1', ctrl: false, shift: false }, () =>  {
       this.renderer.text(5, 32, 'Starting game...');
 
       // some where in here start the game.
+      this.gameStartCb();
     });
 
-    userInput.addListener({ name: '2'}, () => {
+    userInput.addListener({ name: '2', ctrl: false, shift: false }, () => {
       this.renderer.text(5, 32, "Enter IP Address to join: ");
 
       // grab user input for ip address.
       userInput.readStream((ipAddress) => {
         this.renderer.text(5, 33, `Joining ${ipAddress}....`);
+
+        // some where in here start the game.
+
       }, { x: 33, y: 32 });
 
     });
@@ -47,7 +51,7 @@ export default class Menu {
 
   }
 
-  update() {
-    // return start or ip address or null
+  onGameStart(cb) {
+    this.gameStartCb = cb;
   }
 }

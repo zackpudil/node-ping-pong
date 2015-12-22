@@ -43,6 +43,7 @@ class UserInputCoordinator {
 		let activatedListeners = UserInputCoordinator.inputHandlers.filter(l => {
 			// if ch is not undefined, then key is undefined.
 			// ch = str.  key = { name: str, ctrl: bool, shift: bool }
+			debugger;
 			var keyMatches = key 
 				&& l.key.name == key.name 
 				&& l.key.ctrl == key.ctrl 
