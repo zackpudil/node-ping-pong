@@ -5,7 +5,7 @@ import userInput from './user-input';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
 
-const gameStates = {
+const GameStates = {
   menu: 'Menu',
   play: 'Play'
 };
@@ -23,7 +23,7 @@ export default class Engine {
     ];
 
     // start game state as the menu
-    this.gameState = gameStates.menu;
+    this.gameState = GameStates.menu;
 
     // listen for ctrl+c to exit.
     userInput.addListener({ name: 'c', ctrl: true, shift: false}, () => { 
@@ -45,7 +45,7 @@ export default class Engine {
   }
 
   startGame() {
-    this.gameState = gameStates.play;
+    this.gameState = GameStates.play;
     this.gameLoop = setInterval(this.tick.bind(this), Interval);
   }
 
@@ -53,9 +53,9 @@ export default class Engine {
     // check game state to determine what to do.
     this.renderer.clear();
 
-    if(this.gameState == gameStates.menu) {
+    if(this.gameState == GameStates.menu) {
       this.menu.render();
-    } else {
+    } else if (this.gameState == GameStates.play) {
       this.actors.forEach(a => {
         a.update();
         a.render()

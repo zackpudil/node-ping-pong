@@ -18,7 +18,7 @@ export default class PlayerPaddle {
 
 	render() {
 		debugger;
-		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, [255, 255, 255]);
+		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, [0, 204, 0]);
 	}
 
 	update() {

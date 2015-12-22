@@ -7,7 +7,7 @@ export default class AIPaddle {
 	}
 
 	render() { 
-		this.modelRenderer.renderModel('paddle', this.pos, [255, 255, 255]);
+		this.modelRenderer.renderModel('paddle', this.pos, [0, 204, 0]);
 	}
 
 	update() {
