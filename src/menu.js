@@ -2,29 +2,30 @@ import ModelRenderer from './model-renderer';
 import userInput from './user-input';
 import Renderer from './renderer';
 
+const MenuStates = {
+  initial: 'Initial',
+  readingInput: 'ReadingInput',
+};
+
 export default class Menu {
 
   constructor() {
     this.renderer = new Renderer();
     this.modelRenderer = new ModelRenderer();
+    this.menuState = MenuStates.initial;
+    this.ipAddress = "";
 
-    userInput.addListener({ name: '1', ctrl: false, shift: false }, () =>  {
-      this.renderer.text(5, 32, 'Starting game...');
-
-      // some where in here start the game.
-      this.gameStartCb();
-    });
+    userInput.addListener({ name: '1', ctrl: false, shift: false }, () =>  this.gameStartCb());
 
     userInput.addListener({ name: '2', ctrl: false, shift: false }, () => {
-      this.renderer.text(5, 32, "Enter IP Address to join: ");
+      this.menuState = MenuStates.readingInput;
+      debugger;
 
       // grab user input for ip address.
-      userInput.readStream((ipAddress) => {
-        this.renderer.text(5, 33, `Joining ${ipAddress}....`);
-
-        // some where in here start the game.
-
-      }, { x: 33, y: 32 });
+      var startPos = { x: 33, y: 32 };
+      userInput.readStream(
+        (str) => this.ipAddress = str,
+        (str) => this.gameStartCb(str));
 
     });
   }
@@ -49,6 +50,10 @@ export default class Menu {
     this.renderer.text(5, 30, "Press 1 to start a game.");
     this.renderer.text(5, 31, "Press 2 to join a game.");
 
+    if(this.menuState == MenuStates.readingInput) {
+      this.renderer.text(5, 32, "Enter IP Address to join: ");
+      this.renderer.text(33, 32, this.ipAddress);
+    }
   }
 
   onGameStart(cb) {

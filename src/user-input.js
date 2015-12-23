@@ -1,5 +1,4 @@
 import keypress from 'keypress';
-import Renderer from './renderer';
 
 let instance = null
 let inputHandlers = [];
@@ -20,8 +19,7 @@ class UserInputCoordinator {
 		// A singleton instance
 		if(!instance) {
 			instance = this;
-			this.renderer = new Renderer();
-
+			
 			// Feed all input to our handler, not to stdout
 			process.stdin.setRawMode(true);
 			// init keypress on stdin.
@@ -43,7 +41,6 @@ class UserInputCoordinator {
 		let activatedListeners = UserInputCoordinator.inputHandlers.filter(l => {
 			// if ch is not undefined, then key is undefined.
 			// ch = str.  key = { name: str, ctrl: bool, shift: bool }
-			debugger;
 			var keyMatches = key 
 				&& l.key.name == key.name 
 				&& l.key.ctrl == key.ctrl 
@@ -62,9 +59,8 @@ class UserInputCoordinator {
 		});
 	}
 
-	readStream(enterCb, startPos) {
+	readStream(keyPressedCb, enterCb) {
 		var str = "";
-		let index = 0;
 		UserInputCoordinator.streamMode = true;
 
 		process.stdin.on('keypress', (ch, key) => {
@@ -73,29 +69,18 @@ class UserInputCoordinator {
 
 			if(key && (key.name == 'enter' || key.name == 'return')) {
 				//if enter pressed, pass string to caller, set stream mode to false and return.
-				enterCb(str);
 				UserInputCoordinator.streamMode = false;
-				return;
-			}
 
-			if(key && key.name == 'backspace') {
-				// if backspace pressed, remove last letter from string, clear area, redraw string, return.
+				enterCb(str);
+			} else if(key && key.name == 'backspace') {
 				str = str.slice(0, -1);
-
-				this.renderer.clearArea(startPos.x, startPos.y, startPos.x+index, startPos.y);
-				this.renderer.text(startPos.x, startPos.y, str);
-
 				// update cursor position.
-				index--;
-				return;
-			}
+				keyPressedCb(str);
+			} else { 
 
-			// add charactor to string.
-			str += ch || key.name;
-			// render new charactor
-			this.renderer.text(startPos.x + index, startPos.y, ch || key.name);
-			// update cursor position.
-			index++;
+				str += ch || key.name;
+				keyPressedCb(str);
+			}
 		});
 	}
 }

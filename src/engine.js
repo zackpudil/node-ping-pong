@@ -41,12 +41,11 @@ export default class Engine {
 
   start() {
     this.menu.onGameStart(this.startGame.bind(this));
-    this.tick();
+    this.gameLoop = setInterval(this.tick.bind(this), Interval);
   }
 
   startGame() {
     this.gameState = GameStates.play;
-    this.gameLoop = setInterval(this.tick.bind(this), Interval);
   }
 
   tick() {
