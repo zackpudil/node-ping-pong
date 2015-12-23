@@ -67,7 +67,7 @@ export default class Engine {
 
       this.paddles.forEach(p => {
         p.update();
-        this.ball.didHit(p.pos, 2, 5);
+        this.ball.didHit(p.pos, 4, 6);
         p.render()
       });
 
