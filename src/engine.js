@@ -1,29 +1,25 @@
 import Menu from './menu';
 import Renderer from './renderer';
 import userInput from './user-input';
+import GameConstants from './game-constants';
 
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
-
-const GameStates = {
-  menu: 'Menu',
-  play: 'Play'
-};
-
-const Interval = 70;
+import Ball from './actors/ball';
 
 export default class Engine {
 
   constructor() {
     this.renderer = new Renderer();
     this.menu = new Menu();
-    this.actors = [
+    this.ball = new Ball(50, 20);
+    this.paddles = [
       new PlayerPaddle(10, 10),
-      new AIPaddle(100, 10)
+      new PlayerPaddle(100, 10, { up: 'e', down: 'd'}),
     ];
 
     // start game state as the menu
-    this.gameState = GameStates.menu;
+    this.gameState = GameConstants.GameStates.menu;
 
     // listen for ctrl+c to exit.
     userInput.addListener({ name: 'c', ctrl: true, shift: false}, () => { 
@@ -41,24 +37,41 @@ export default class Engine {
 
   start() {
     this.menu.onGameStart(this.startGame.bind(this));
-    this.gameLoop = setInterval(this.tick.bind(this), Interval);
+    this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
   }
 
   startGame() {
-    this.gameState = GameStates.play;
+    this.gameState = GameConstants.GameStates.play;
+  }
+
+  renderBounds() {
+    this.renderer.bg(0, 204, 0);
+    let bounds = GameConstants.Bounds;
+
+    this.renderer.line(bounds.minX, bounds.minY, bounds.maxX, bounds.minY);
+    this.renderer.line(bounds.minX, bounds.minY, bounds.minX, bounds.maxY);
+    this.renderer.line(bounds.maxX, bounds.minY, bounds.maxX, bounds.maxY);
+    this.renderer.line(bounds.minX, bounds.maxY, bounds.maxX, bounds.maxY);
   }
 
   tick() {
     // check game state to determine what to do.
     this.renderer.clear();
 
-    if(this.gameState == GameStates.menu) {
+   if(this.gameState == GameConstants.GameStates.menu) {
       this.menu.render();
-    } else if (this.gameState == GameStates.play) {
-      this.actors.forEach(a => {
-        a.update();
-        a.render()
+    } else if (this.gameState == GameConstants.GameStates.play) {
+
+      this.renderBounds();
+      this.ball.update();
+
+      this.paddles.forEach(p => {
+        p.update();
+        this.ball.didHit(p.pos, 4, 6);
+        p.render()
       });
+
+      this.ball.render();
     }
 
     this.renderer.reset();
