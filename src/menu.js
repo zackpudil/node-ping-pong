@@ -1,24 +1,20 @@
 import ModelRenderer from './model-renderer';
 import userInput from './user-input';
 import Renderer from './renderer';
-
-const MenuStates = {
-  initial: 'Initial',
-  readingInput: 'ReadingInput',
-};
+import GameConstants from './game-constants';
 
 export default class Menu {
 
   constructor() {
     this.renderer = new Renderer();
     this.modelRenderer = new ModelRenderer();
-    this.menuState = MenuStates.initial;
+    this.menuState = GameConstants.MenuStates.initial;
     this.ipAddress = "";
 
     userInput.addListener({ name: '1', ctrl: false, shift: false }, () =>  this.gameStartCb());
 
     userInput.addListener({ name: '2', ctrl: false, shift: false }, () => {
-      this.menuState = MenuStates.readingInput;
+      this.menuState = GameConstants.MenuStates.readingInput;
       debugger;
 
       // grab user input for ip address.
@@ -50,7 +46,7 @@ export default class Menu {
     this.renderer.text(5, 30, "Press 1 to start a game.");
     this.renderer.text(5, 31, "Press 2 to join a game.");
 
-    if(this.menuState == MenuStates.readingInput) {
+    if(this.menuState == GameConstants.MenuStates.readingInput) {
       this.renderer.text(5, 32, "Enter IP Address to join: ");
       this.renderer.text(33, 32, this.ipAddress);
     }

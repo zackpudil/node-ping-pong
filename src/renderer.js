@@ -30,6 +30,10 @@ export default class Renderer {
 		canvas.text(x, y, str);
 	}
 
+	line(startX, startY, endX, endY) {
+		canvas.line(startX, startY, endX, endY);
+	}
+
 	clearArea(x, y, width, height) {
 		canvas.fg(0, 0, 0); 
 		canvas.bg(0, 0, 0);
