@@ -9,21 +9,21 @@ export default class Ball {
 		this.startPos = { x: x, y: y };
 		this.pos = { x: x, y: y };
 		this.dir = { x: -1, y: -1 };
-		this.speed = 2;
+		this.speed = 1;
 
 		this.scoreCb = () => { };
 	}
 
 	render() {
-		this.modelRenderer.renderModel("ball", this.pos, [0, 204, 0])
+		this.modelRenderer.renderModel("ball", this.pos, [0, 204, 0], 10)
 	}
 
 	update() {
-		if(this.pos.y > GameConstants.Bounds.maxY-2 || this.pos.y < GameConstants.Bounds.minY+2) {
+		if(this.pos.y > GameConstants.Bounds.maxY-10 || this.pos.y < GameConstants.Bounds.minY) {
 			this.dir.y *= -1;
 		}
 
-		if(this.pos.x > GameConstants.Bounds.maxX-2 || this.pos.x < GameConstants.Bounds.minY+2) {
+		if(this.pos.x > GameConstants.Bounds.maxX-10 || this.pos.x < GameConstants.Bounds.minY) {
 			this.reset();
 			this.scoreCb();
 		}
@@ -34,11 +34,11 @@ export default class Ball {
 
 	didHit(pos, width, height) {
 		if(this.pos.x < pos.x + width &&
-			this.pos.x + 2 > pos.x &&
+			this.pos.x + 10 > pos.x &&
 			this.pos.y < pos.y + height &&
-			this.pos.y + 2 > pos.y) {
+			this.pos.y + 10 > pos.y) {
 
-			this.speed = Math.max(this.speed + 0.25, 2);
+			this.speed += 0.5;
 			this.dir.x *= -1
 		}
 	}

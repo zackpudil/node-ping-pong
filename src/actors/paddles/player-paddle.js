@@ -9,23 +9,19 @@ export default class PlayerPaddle {
 		this.pos = { x: x, y: y };
 
 		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {
-			this.pos.y -= 3;
-			this.dirY = -1;
+			this.pos.y -= 40;
 		});
 
 		userInput.addListener({ name: keyMaps.down, ctrl: false, shift: false }, () => {
-			this.pos.y += 3;
-			this.dirY = 1;
+			this.pos.y += 40;
 		});
 	}
 
 	render() {
-		debugger;
-		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, [0, 204, 0]);
-		this.dirY = 0;
+		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, [0, 204, 0], 10);
 	}
 
 	update() {
-		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-7), GameConstants.Bounds.minY + 2);
+		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-60), GameConstants.Bounds.minY + 10);
 	}
 }

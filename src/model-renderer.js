@@ -18,7 +18,5 @@ export default class ModelRenderer {
 			// the x, y coords of the points are relative to 0, 0. Hence starting pos.
 			this.renderer.box(renderAt.x + (p.x * scale), renderAt.y + (p.y * scale), scale, scale);
 		});
-
-		this.renderer.reset();
 	}
 }

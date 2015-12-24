@@ -11,15 +11,6 @@ gulp.task("babelify", function () {
 		.pipe(gulp.dest("./dist"));
 });
 
-gulp.task("browserify", ['babelify'],  function () {
-	return gulp.src("dist/app.js")
-		.pipe(browserify({
-			insertGlobals: true
-		}))
-		.pipe(rename("ping-pong.js"))
-		.pipe(gulp.dest("./"));
-});
-
-gulp.task("default", ["browserify"], function () {
-	gulp.watch('src/**/*.js', ['browserify']);
+gulp.task("default", ["babelify"], function () {
+	gulp.watch('src/**/*.js', ['babelify']);
 });

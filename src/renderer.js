@@ -16,37 +16,41 @@ export default class Renderer {
 
 	bg(r, g, b) {
 		currentColor.bg = [r, g, b];
-		this.canvas.bg(...currentColor.bg);
 	}
 
 	fg(r, g, b) {
 		currentColor.fg = [r, g, b];
-		this.canvas.fg(...currentColor.fg);
 	}
 
 	box(x, y, width, height) {
-		this.canvas.box(x, y, width, height);
+		this.canvas.rect(x, y, width, height);
+		this.canvas.fill();
+
+		this.canvas.beginPath();
 	}
 
-	text(x, y, str) {
-		this.canvas.text(x, y, str);
+	text(x, y, str, font = null) {
+		if(font)  {
+			this.canvas.font = font
+		}
+
+		this.canvas.fillText(str, x, y);
 	}
 
 	line(startX, startY, endX, endY) {
-		this.canvas.line(startX, startY, endX, endY);
+		this.canvas.moveTo(startX, startY);
+		this.canvas.lineTo(endX, endY);
+
+		this.canvas.stroke();
+		this.canvas.beginPath();
 	}
 
 	clearArea(x, y, width, height) {
-		this.canvas.fg(0, 0, 0); 
-		this.canvas.bg(0, 0, 0);
-		
-		this.canvas.scrub(x, y, width, height);
-
-		this.canvas.bg(...currentColor.bg);
-		this.canvas.fg(...currentColor.fg);
+		this.canvas.clearRect(x, y, width, height);
 	}
 
 	clear() {
-		this.canvas.clear();
+		this.canvas.clearRect(0, 0, this.canvas.canvas.width, this.canvas.canvas.height);
+		this.canvas.beginPath();
 	}
 }

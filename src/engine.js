@@ -11,10 +11,10 @@ export default class Engine {
   constructor(renderer) {
     this.renderer = renderer;
     this.menu = new Menu(renderer);
-    this.ball = new Ball(50, 20, renderer);
+    this.ball = new Ball(300, 300, renderer);
     this.paddles = [
-      new PlayerPaddle(10, 10, renderer),
-      new PlayerPaddle(100, 10, renderer, { up: 'e', down: 'd'}),
+      new PlayerPaddle(60, 10, renderer),
+      new PlayerPaddle(710, 10, renderer, { up: 'e', down: 'd'}),
     ];
 
     // start game state as the menu
@@ -66,7 +66,7 @@ export default class Engine {
 
       this.paddles.forEach(p => {
         p.update();
-        this.ball.didHit(p.pos, 4, 6);
+        this.ball.didHit(p.pos, 10, 50);
         p.render()
       });
 

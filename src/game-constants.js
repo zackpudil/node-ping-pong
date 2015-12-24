@@ -3,18 +3,22 @@ const GameStates = {
   play: 'Play'
 };
 
-const Interval = 70;
+const Interval = 10;
 
-const MenuStates = {
-  initial: 'Initial',
-  readingInput: 'ReadingInput',
+const KeyMap = {
+	'up': 38,
+	'down': 40,
+	'e': 69,
+	'd': 68,
+	'1': 49,
+	'2': 50
 };
 
-const Bounds = { minX: 5, minY: 3, maxX: 110, maxY: 36 };
+const Bounds = { minX: 50, minY: 50, maxX: 750, maxY: 550 };
 
 export default class GameConstants {
 	static get GameStates() { return GameStates; }
 	static get Interval() { return Interval; }
-	static get MenuStates() { return MenuStates; }
 	static get Bounds() { return Bounds; }
+	static get KeyMap() { return KeyMap; }
 }
