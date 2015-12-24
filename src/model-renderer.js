@@ -6,12 +6,14 @@ export default class ModelRenderer {
 		this.renderer = renderer;
 	}
 
-	renderModel(modelId, renderAt, rgb, scale = 1) {
+	renderModel(modelId, renderAt, color, scale = 1) {
 		// grab the json model that corresponds to the id.
 		var model = require(`../models/${modelId}.json`);
 
 		// set the background color.
-		this.renderer.bg(...rgb);
+		console.log(color);
+		this.renderer.fillColor(color);
+		this.renderer.strokeColor(color);
 
 		// loop through the points to render the box at each pos.
 		model.points.forEach(p => {

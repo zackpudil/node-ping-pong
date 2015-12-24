@@ -15,7 +15,7 @@ export default class Ball {
 	}
 
 	render() {
-		this.modelRenderer.renderModel("ball", this.pos, [0, 204, 0], 10)
+		this.modelRenderer.renderModel("ball", this.pos, '#00cc66', 10)
 	}
 
 	update() {

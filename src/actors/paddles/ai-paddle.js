@@ -8,7 +8,7 @@ export default class AIPaddle {
 	}
 
 	render() { 
-		this.modelRenderer.renderModel('paddle', this.pos, [0, 204, 0], 10);
+		this.modelRenderer.renderModel('paddle', this.pos, '#00cc66', 10);
 	}
 
 	update() {

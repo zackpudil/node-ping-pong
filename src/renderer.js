@@ -1,6 +1,6 @@
 let currentColor = {
-	fg: [255, 255, 255],
-	bg: [0, 0, 0]
+	stroke: '#000000', 
+	fill: '#000000'
 };
 
 /*
@@ -14,12 +14,14 @@ export default class Renderer {
 
 	get currentColor() { return currentColor; }
 
-	bg(r, g, b) {
-		currentColor.bg = [r, g, b];
+	strokeColor(color) {
+		currentColor.stroke = color;
+		this.canvas.strokeStyle= color;
 	}
 
-	fg(r, g, b) {
-		currentColor.fg = [r, g, b];
+	fillColor(color) {
+		currentColor.fill = color;
+		this.canvas.fillStyle = color;
 	}
 
 	box(x, y, width, height) {

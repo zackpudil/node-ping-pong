@@ -14,24 +14,11 @@ export default class Engine {
     this.ball = new Ball(300, 300, renderer);
     this.paddles = [
       new PlayerPaddle(60, 10, renderer),
-      new PlayerPaddle(710, 10, renderer, { up: 'e', down: 'd'}),
+      new PlayerPaddle(720, 10, renderer, { up: 'e', down: 'd'}),
     ];
 
     // start game state as the menu
     this.gameState = GameConstants.GameStates.menu;
-
-    // listen for ctrl+c to exit.
-    userInput.addListener({ name: 'c', ctrl: true, shift: false}, () => { 
-      this.renderer.bg(0, 0, 0);
-      this.renderer.fg(255, 255, 255);
-
-      this.renderer.clear();
-      this.renderer.reset();
-
-      clearInterval(this.gameLoop);
-
-      process.exit();
-    });
   }
 
   start() {
@@ -44,7 +31,7 @@ export default class Engine {
   }
 
   renderBounds() {
-    this.renderer.bg(0, 204, 0);
+    this.renderer.strokeColor('#000000');
     let bounds = GameConstants.Bounds;
 
     this.renderer.line(bounds.minX, bounds.minY, bounds.maxX, bounds.minY);

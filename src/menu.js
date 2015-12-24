@@ -14,6 +14,7 @@ export default class Menu {
   }
 
   render() {
+    this.renderer.fillColor('#cc00ff');
     this.renderer.text(20, 250, 'Ping', 'italic 140pt Calibri');
     this.renderer.text(30, 400, 'Pong', 'italic 140pt Calibri');
 
