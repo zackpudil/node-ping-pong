@@ -8,56 +8,64 @@ import Ball from './actors/ball';
 
 export default class Engine {
 
-  constructor(renderer) {
-    this.renderer = renderer;
-    this.menu = new Menu(renderer);
-    this.ball = new Ball(300, 300, renderer);
-    this.paddles = [
-      new PlayerPaddle(60, 10, renderer),
-      new PlayerPaddle(720, 10, renderer, { up: 'e', down: 'd'}),
-    ];
+	constructor(renderer) {
+		this.renderer = renderer;
+		this.menu = new Menu(renderer);
+		this.ball = new Ball(300, 300, renderer);
+		this.paddles = [
+			new PlayerPaddle(60, 10, renderer),
+			new PlayerPaddle(720, 10, renderer, { up: 'e', down: 'd'}),
+		];
 
-    // start game state as the menu
-    this.gameState = GameConstants.GameStates.menu;
-  }
+		// start game state as the menu
+		this.gameState = GameConstants.GameStates.menu;
+	}
 
-  start() {
-    this.menu.onGameStart(this.startGame.bind(this));
-    this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
-  }
+	start() {
+		this.menu.onGameStart({
+			startGameCb: this.startGame.bind(this),
+			exitGameCb: this.endGame.bind(this)
+		});
+		this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
+	}
 
-  startGame() {
-    this.gameState = GameConstants.GameStates.play;
-  }
+	startGame() {
+		this.gameState = GameConstants.GameStates.play;
+	}
 
-  renderBounds() {
-    this.renderer.strokeColor('#000000');
-    let bounds = GameConstants.Bounds;
+	endGame() {
+		// this will close the electron window.
+		window.close();
+	}
 
-    this.renderer.line(bounds.minX, bounds.minY, bounds.maxX, bounds.minY);
-    this.renderer.line(bounds.minX, bounds.minY, bounds.minX, bounds.maxY);
-    this.renderer.line(bounds.maxX, bounds.minY, bounds.maxX, bounds.maxY);
-    this.renderer.line(bounds.minX, bounds.maxY, bounds.maxX, bounds.maxY);
-  }
+	renderBounds() {
+		this.renderer.strokeColor('#000000');
+		let bounds = GameConstants.Bounds;
 
-  tick() {
-    // check game state to determine what to do.
-    this.renderer.clear();
+		this.renderer.line(bounds.minX, bounds.minY, bounds.maxX, bounds.minY);
+		this.renderer.line(bounds.minX, bounds.minY, bounds.minX, bounds.maxY);
+		this.renderer.line(bounds.maxX, bounds.minY, bounds.maxX, bounds.maxY);
+		this.renderer.line(bounds.minX, bounds.maxY, bounds.maxX, bounds.maxY);
+	}
 
-   if(this.gameState == GameConstants.GameStates.menu) {
-      this.menu.render();
-    } else if (this.gameState == GameConstants.GameStates.play) {
+	tick() {
+		// check game state to determine what to do.
+		this.renderer.clear();
 
-      this.renderBounds();
-      this.ball.update();
+	 if(this.gameState == GameConstants.GameStates.menu) {
+			this.menu.render();
+		} else if (this.gameState == GameConstants.GameStates.play) {
 
-      this.paddles.forEach(p => {
-        p.update();
-        this.ball.didHit(p.pos, 10, 50);
-        p.render()
-      });
+			this.renderBounds();
+			this.ball.update();
 
-      this.ball.render();
-    }
-  }
+			this.paddles.forEach(p => {
+				p.update();
+				this.ball.didHit(p.pos, 10, 50);
+				p.render()
+			});
+
+			this.ball.render();
+		}
+	}
 }

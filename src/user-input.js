@@ -40,6 +40,9 @@ class UserInputCoordinator {
 	}
 
 	addListener(key, handler) {
+		key.ctrl = key.ctrl || false;
+		key.shift = key.shift || false;
+		
 		UserInputCoordinator.inputHandlers.push({
 			key: key,
 			handle: handler
