@@ -4,8 +4,8 @@ import GameConstants from '../../game-constants';
 
 export default class PlayerPaddle {
 
-	constructor(x, y, keyMaps = { up: 'up', down: 'down'}) {
-		this.renderer = new ModelRenderer();
+	constructor(x, y, renderer, keyMaps = { up: 'up', down: 'down'}) {
+		this.renderer = new ModelRenderer(renderer);
 		this.pos = { x: x, y: y };
 
 		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {

@@ -2,8 +2,8 @@ import Renderer from './renderer';
 
 export default class ModelRenderer {
 
-	constructor() {
-		this.renderer = new Renderer();
+	constructor(renderer) {
+		this.renderer = renderer;
 	}
 
 	renderModel(modelId, renderAt, rgb, scale = 1) {

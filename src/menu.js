@@ -1,13 +1,12 @@
 import ModelRenderer from './model-renderer';
 import userInput from './user-input';
-import Renderer from './renderer';
 import GameConstants from './game-constants';
 
 export default class Menu {
 
-  constructor() {
-    this.renderer = new Renderer();
-    this.modelRenderer = new ModelRenderer();
+  constructor(renderer) {
+    this.renderer = renderer;
+    this.modelRenderer = new ModelRenderer(renderer);
     this.menuState = GameConstants.MenuStates.initial;
     this.ipAddress = "";
 

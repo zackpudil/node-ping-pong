@@ -3,8 +3,8 @@ import GameConstants from '../game-constants';
 
 export default class Ball {
 
-	constructor(x, y) {
-		this.modelRenderer = new ModelRenderer();
+	constructor(x, y, renderer) {
+		this.modelRenderer = new ModelRenderer(renderer);
 
 		this.startPos = { x: x, y: y };
 		this.pos = { x: x, y: y };

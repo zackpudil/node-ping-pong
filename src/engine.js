@@ -1,5 +1,4 @@
 import Menu from './menu';
-import Renderer from './renderer';
 import userInput from './user-input';
 import GameConstants from './game-constants';
 
@@ -9,13 +8,13 @@ import Ball from './actors/ball';
 
 export default class Engine {
 
-  constructor() {
-    this.renderer = new Renderer();
-    this.menu = new Menu();
-    this.ball = new Ball(50, 20);
+  constructor(renderer) {
+    this.renderer = renderer;
+    this.menu = new Menu(renderer);
+    this.ball = new Ball(50, 20, renderer);
     this.paddles = [
-      new PlayerPaddle(10, 10),
-      new PlayerPaddle(100, 10, { up: 'e', down: 'd'}),
+      new PlayerPaddle(10, 10, renderer),
+      new PlayerPaddle(100, 10, renderer, { up: 'e', down: 'd'}),
     ];
 
     // start game state as the menu
@@ -73,7 +72,5 @@ export default class Engine {
 
       this.ball.render();
     }
-
-    this.renderer.reset();
   }
 }

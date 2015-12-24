@@ -2,9 +2,9 @@ import ModelRenderer from '../../model-renderer';
 import GameConstants from '../../game-constants';
 
 export default class AIPaddle {
-	constructor(x, y) {
+	constructor(x, y, render) {
 		this.pos = { x: x, y: y };
-		this.modelRenderer = new ModelRenderer();
+		this.modelRenderer = new ModelRenderer(render);
 	}
 
 	render() { 
