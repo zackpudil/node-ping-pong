@@ -15,13 +15,6 @@ export default class PauseMenu {
 	}
 
 	render() {
-    // let color = '#D70404';
-    // this.renderer.strokeColor(color);
-		// this.renderer.line(150, 75, 350, 75);
-		// this.renderer.line(350, 75, 350, 150);
-		// this.renderer.line(350, 150, 150, 150);
-		// this.renderer.line(150, 150, 150, 75);
-
     this.renderer.fillColor('#0497D7');
     this.renderer.box(150, 75, 450, 150);
 
