@@ -40,9 +40,10 @@ class UserInputCoordinator {
 	}
 
 	addListener(key, handler) {
+		// ctrl and shift are optional values, default to false if not passed.
 		key.ctrl = key.ctrl || false;
 		key.shift = key.shift || false;
-		
+
 		UserInputCoordinator.inputHandlers.push({
 			key: key,
 			handle: handler

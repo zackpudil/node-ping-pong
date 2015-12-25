@@ -5,9 +5,9 @@ import GameConstants from './game-constants';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
 import Ball from './actors/ball';
+import electron from 'electron';
 
 export default class Engine {
-
 	constructor(renderer) {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
@@ -34,8 +34,8 @@ export default class Engine {
 	}
 
 	endGame() {
-		// this will close the electron window.
-		window.close();
+		// signal to the main process that we want to close the app.
+		electron.ipcRenderer.send('exitApp');
 	}
 
 	renderBounds() {

@@ -6,7 +6,6 @@ export default class Menu {
 		this.renderer = renderer;
 		this.ipAddress = "";
 
-		debugger;
 		userInput.addListener({ name: '1' }, () =>  this.gameStartCb());
 
 		userInput.addListener({ name: '2' }, () => {
@@ -30,6 +29,6 @@ export default class Menu {
 
 	onGameStart(options) {
 		this.gameStartCb = options.startGameCb;
-		this.gameEndCb = options.endGameCb;
+		this.gameEndCb = options.exitGameCb;
 	}
 }

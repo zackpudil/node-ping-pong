@@ -11,7 +11,7 @@ export default class ModelRenderer {
 		var model = require(`../models/${modelId}.json`);
 
 		// set the background color.
-		console.log(color);
+		// console.log(color);
 		this.renderer.fillColor(color);
 		this.renderer.strokeColor(color);
 

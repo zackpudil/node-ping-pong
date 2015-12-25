@@ -11,7 +11,8 @@ const KeyMap = {
 	'e': 69,
 	'd': 68,
 	'1': 49,
-	'2': 50
+	'2': 50,
+  '3': 51
 };
 
 const Bounds = { minX: 50, minY: 50, maxX: 750, maxY: 550 };
