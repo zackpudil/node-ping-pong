@@ -44,6 +44,15 @@ export default class Renderer {
 		this.canvas.lineTo(endX, endY);
 
 		this.canvas.stroke();
+		this.canvas.fill();
+		this.canvas.beginPath();
+	}
+
+	circle(x, y, r) {
+		this.canvas.arc(x, y, r, 0, Math.PI*2);
+		this.canvas.stroke();
+		this.canvas.fill();
+
 		this.canvas.beginPath();
 	}
 
