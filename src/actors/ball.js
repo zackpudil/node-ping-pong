@@ -3,27 +3,29 @@ import GameConstants from '../game-constants';
 
 export default class Ball {
 
-	constructor(x, y, renderer) {
+	constructor(x, y, renderer, scale = 10) {
 		this.modelRenderer = new ModelRenderer(renderer);
 
 		this.startPos = { x: x, y: y };
 		this.pos = { x: x, y: y };
 		this.dir = { x: -1, y: -1 };
-		this.speed = 1;
+		this.speed = 1.5;
+
+		this.scale = scale;
 
 		this.scoreCb = () => { };
 	}
 
 	render() {
-		this.modelRenderer.renderModel("ball", this.pos, '#00cc66', 10)
+		this.modelRenderer.renderModel("ball", this.pos, '#00cc66', this.scale)
 	}
 
 	update() {
-		if(this.pos.y > GameConstants.Bounds.maxY-10 || this.pos.y < GameConstants.Bounds.minY) {
+		if(this.pos.y > GameConstants.Bounds.maxY-this.scale || this.pos.y < GameConstants.Bounds.minY) {
 			this.dir.y *= -1;
 		}
 
-		if(this.pos.x > GameConstants.Bounds.maxX-10 || this.pos.x < GameConstants.Bounds.minY) {
+		if(this.pos.x > GameConstants.Bounds.maxX-this.scale || this.pos.x < GameConstants.Bounds.minY) {
 			this.reset();
 			this.scoreCb();
 		}
@@ -34,9 +36,9 @@ export default class Ball {
 
 	didHit(pos, width, height) {
 		if(this.pos.x < pos.x + width &&
-			this.pos.x + 10 > pos.x &&
+			this.pos.x + this.scale > pos.x &&
 			this.pos.y < pos.y + height &&
-			this.pos.y + 10 > pos.y) {
+			this.pos.y + this.scale > pos.y) {
 
 			this.speed += 0.5;
 			this.dir.x *= -1
@@ -46,7 +48,7 @@ export default class Ball {
 	reset() {
 		this.pos = { x: this.startPos.x, y: this.startPos.y };
 		this.dir.y = Math.random()*10 < 5 ? -1 : 1;
-		this.speed = 1;
+		this.speed = 2;
 	}
 
 	onScore(scoreCb) {

@@ -7,14 +7,16 @@ import AIPaddle from './actors/paddles/ai-paddle';
 import Ball from './actors/ball';
 import electron from 'electron';
 
+let Bounds = GameConstants.Bounds;
+
 export default class Engine {
 	constructor(renderer) {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
-		this.ball = new Ball(300, 300, renderer);
+		this.ball = new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, renderer);
 		this.paddles = [
-			new PlayerPaddle(60, 10, renderer),
-			new PlayerPaddle(720, 10, renderer, { up: 'e', down: 'd'}),
+			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, renderer),
+			new PlayerPaddle(Bounds.maxX - 20, Bounds.maxX/2, renderer, { up: 'e', down: 'd'}),
 		];
 
 		// start game state as the menu
@@ -40,31 +42,35 @@ export default class Engine {
 
 	renderBounds() {
 		this.renderer.strokeColor('#000000');
-		let bounds = GameConstants.Bounds;
+		this.renderer.fillColor('#FFFFFF');
 
-		this.renderer.line(bounds.minX, bounds.minY, bounds.maxX, bounds.minY);
-		this.renderer.line(bounds.minX, bounds.minY, bounds.minX, bounds.maxY);
-		this.renderer.line(bounds.maxX, bounds.minY, bounds.maxX, bounds.maxY);
-		this.renderer.line(bounds.minX, bounds.maxY, bounds.maxX, bounds.maxY);
+		this.renderer.line(Bounds.minX, Bounds.minY, Bounds.maxX, Bounds.minY);
+		this.renderer.line(Bounds.minX, Bounds.minY, Bounds.minX, Bounds.maxY);
+		this.renderer.line(Bounds.maxX, Bounds.minY, Bounds.maxX, Bounds.maxY);
+		this.renderer.line(Bounds.minX, Bounds.maxY, Bounds.maxX, Bounds.maxY);
+
+		this.renderer.line(Bounds.maxX/2 + 25, Bounds.minY, Bounds.maxX/2 + 25, Bounds.maxY);
+
+		this.renderer.circle(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, 25);
 	}
 
 	tick() {
-		// check game state to determine what to do.
 		this.renderer.clear();
 
-	 if(this.gameState == GameConstants.GameStates.menu) {
+		// check game state to determine what to do.
+		if(this.gameState == GameConstants.GameStates.menu) {
 			this.menu.render();
 		} else if (this.gameState == GameConstants.GameStates.play) {
 
 			this.renderBounds();
-			this.ball.update();
 
 			this.paddles.forEach(p => {
 				p.update();
-				this.ball.didHit(p.pos, 10, 50);
+				this.ball.didHit(p.pos, p.scale, p.scale*6);
 				p.render()
 			});
 
+			this.ball.update();
 			this.ball.render();
 		}
 	}

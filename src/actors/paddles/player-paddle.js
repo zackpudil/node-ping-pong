@@ -4,9 +4,10 @@ import GameConstants from '../../game-constants';
 
 export default class PlayerPaddle {
 
-	constructor(x, y, renderer, keyMaps = { up: 'up', down: 'down'}) {
+	constructor(x, y, renderer, keyMaps = { up: 'up', down: 'down'}, scale = 10) {
 		this.renderer = new ModelRenderer(renderer);
 		this.pos = { x: x, y: y };
+		this.scale = 10;
 
 		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {
 			this.pos.y -= 40;
@@ -18,10 +19,10 @@ export default class PlayerPaddle {
 	}
 
 	render() {
-		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, '#00cc66', 10);
+		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, '#00cc66', this.scale);
 	}
 
 	update() {
-		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-60), GameConstants.Bounds.minY + 10);
+		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-(this.scale*6)), GameConstants.Bounds.minY + this.scale);
 	}
 }
