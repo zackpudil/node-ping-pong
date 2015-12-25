@@ -18,7 +18,7 @@ export default class Engine {
 		this.ball = new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, renderer);
 		this.paddles = [
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, renderer),
-			new PlayerPaddle(Bounds.maxX - 20, Bounds.maxX/2, renderer, { up: 'e', down: 'd'}),
+			new PlayerPaddle(Bounds.maxX - 20, Bounds.maxX/2, renderer, { up: 'w', down: 's'}),
 		];
 
 		// start game state as the menu
