@@ -1,6 +1,7 @@
 const GameStates = {
   menu: 'Menu',
-  play: 'Play'
+  play: 'Play',
+  pause: 'Pause'
 };
 
 const Interval = 10;
@@ -12,7 +13,10 @@ const KeyMap = {
 	'd': 68,
 	'1': 49,
 	'2': 50,
-  '3': 51
+  '3': 51,
+  'e': 69,
+  'm': 77,
+  'p': 80
 };
 
 const Bounds = { minX: 50, minY: 50, maxX: 750, maxY: 550 };

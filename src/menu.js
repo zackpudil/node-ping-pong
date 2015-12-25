@@ -31,4 +31,10 @@ export default class Menu {
 		this.gameStartCb = options.startGameCb;
 		this.gameEndCb = options.exitGameCb;
 	}
+
+	deregister() {
+		userInput.removeListener('1');
+		userInput.removeListener('2');
+		userInput.removeListener('3');
+	}
 }

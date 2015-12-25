@@ -1,5 +1,5 @@
 let currentColor = {
-	stroke: '#000000', 
+	stroke: '#000000',
 	fill: '#000000'
 };
 

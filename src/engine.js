@@ -1,7 +1,9 @@
 import Menu from './menu';
+import PauseMenu from './pauseMenu';
 import userInput from './user-input';
 import GameConstants from './game-constants';
 
+import gameState from './gameState';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
 import Ball from './actors/ball';
@@ -11,6 +13,7 @@ export default class Engine {
 	constructor(renderer) {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
+
 		this.ball = new Ball(300, 300, renderer);
 		this.paddles = [
 			new PlayerPaddle(60, 10, renderer),
@@ -18,7 +21,7 @@ export default class Engine {
 		];
 
 		// start game state as the menu
-		this.gameState = GameConstants.GameStates.menu;
+		gameState.state = GameConstants.GameStates.menu;
 	}
 
 	start() {
@@ -30,7 +33,12 @@ export default class Engine {
 	}
 
 	startGame() {
-		this.gameState = GameConstants.GameStates.play;
+		gameState.state = GameConstants.GameStates.play;
+		this.menu.deregister();
+		this.pauseMenu = new PauseMenu(this.renderer, {
+			startGameCb: this.startGame.bind(this),
+			exitGameCb: this.endGame.bind(this)
+		});
 	}
 
 	endGame() {
@@ -50,12 +58,15 @@ export default class Engine {
 
 	tick() {
 		// check game state to determine what to do.
-		this.renderer.clear();
+		if (gameState.state != GameConstants.GameStates.pause) {
+			this.renderer.clear();
+		} else {
+			this.pauseMenu.render();
+		}
 
-	 if(this.gameState == GameConstants.GameStates.menu) {
+	 if(gameState.state == GameConstants.GameStates.menu) {
 			this.menu.render();
-		} else if (this.gameState == GameConstants.GameStates.play) {
-
+		} else if (gameState.state == GameConstants.GameStates.play) {
 			this.renderBounds();
 			this.ball.update();
 
