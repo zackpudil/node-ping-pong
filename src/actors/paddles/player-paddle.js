@@ -1,6 +1,7 @@
 import ModelRenderer from '../../model-renderer';
 import userInput from '../../user-input';
 import GameConstants from '../../game-constants';
+import peer from '../../peer';
 
 export default class PlayerPaddle {
 
@@ -11,15 +12,17 @@ export default class PlayerPaddle {
 
 		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {
 			this.pos.y -= 40;
+			peer.move(-40);
 		});
 
 		userInput.addListener({ name: keyMaps.down, ctrl: false, shift: false }, () => {
 			this.pos.y += 40;
+			peer.move(40);
 		});
 	}
 
 	render() {
-		this.renderer.renderModel('paddle', { x: this.pos.x, y: this.pos.y }, '#00cc66', this.scale);
+		this.renderer.renderModel('paddle', this.pos, '#00cc66', this.scale);
 	}
 
 	update() {

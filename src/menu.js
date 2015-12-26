@@ -1,4 +1,5 @@
 import userInput from './user-input';
+import peers from './peer';
 
 export default class Menu {
 
@@ -6,10 +7,14 @@ export default class Menu {
 		this.renderer = renderer;
 		this.ipAddress = "";
 
-		userInput.addListener({ name: '1' }, () =>  this.gameStartCb());
+		userInput.addListener({ name: '1' }, () =>  {
+			peers.create(() => {
+				this.gameStartCb(false)
+			});
+		});
 
 		userInput.addListener({ name: '2' }, () => {
-			userInput.readStream((str) => this.gameStartCb(str));
+			peers.join('localhost', 3000, () => this.gameStartCb(true));
 		});
 
 		userInput.addListener({ name: '3' }, () => this.gameEndCb());

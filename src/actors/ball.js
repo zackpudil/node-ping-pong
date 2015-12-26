@@ -3,12 +3,12 @@ import GameConstants from '../game-constants';
 
 export default class Ball {
 
-	constructor(x, y, renderer, scale = 10) {
+	constructor(x, y, renderer, dir, scale = 10) {
 		this.modelRenderer = new ModelRenderer(renderer);
 
 		this.startPos = { x: x, y: y };
 		this.pos = { x: x, y: y };
-		this.dir = { x: -1, y: -1 };
+		this.dir = { x: dir, y: -1 };
 		this.speed = 1.5;
 
 		this.scale = scale;
@@ -47,8 +47,8 @@ export default class Ball {
 
 	reset() {
 		this.pos = { x: this.startPos.x, y: this.startPos.y };
-		this.dir.y = Math.random()*10 < 5 ? -1 : 1;
-		this.speed = 2;
+		this.dir.y = -1;
+		this.speed = 1.5;
 	}
 
 	onScore(scoreCb) {
