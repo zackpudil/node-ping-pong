@@ -12,15 +12,16 @@ export default class Board {
 	}
 
 	resizeWindow(boundsObject) {
-		console.log('board resize', boundsObject);
 		electron.ipcRenderer.send('resizeWindow', boundsObject);
-		this.bounds = GameConstants.Bounds;
+		GameConstants.resetBounds();
+		// this.bounds = GameConstants.Bounds;
 	}
 
 	render() {
     this.renderer.strokeColor('#000000');
 		this.renderer.fillColor('#FFFFFF');
 
+		console.log('board render', this.bounds);
 		this.renderer.line(this.bounds.minX, this.bounds.minY, this.bounds.maxX, this.bounds.minY); // top line
 		this.renderer.line(this.bounds.minX, this.bounds.minY, this.bounds.minX, this.bounds.maxY); // right line
 		this.renderer.line(this.bounds.maxX, this.bounds.minY, this.bounds.maxX, this.bounds.maxY); // bottom line

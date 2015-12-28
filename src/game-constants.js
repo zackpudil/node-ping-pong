@@ -25,18 +25,21 @@ const ScorePosition = {
   y: 45
 };
 
+let Bounds;
+resetBounds();
+
 export default class GameConstants {
 	static get GameStates() { return GameStates; }
 	static get Interval() { return Interval; }
 	static get KeyMap() { return KeyMap; }
 	static get ScorePosition() { return ScorePosition; }
   static get Bounds() {
-    // get current window size to make proper bounds
+    return Bounds;
+  }
+  static resetBounds() {
     let maxHeight = window.innerHeight;
     let maxWidth = window.innerWidth;
     let offset = 50;
-    // console.log('bounds', maxHeight, maxWidth);
-    let Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
-    return Bounds;
+    Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
   }
 }
