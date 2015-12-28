@@ -25,7 +25,12 @@ const ScorePosition = {
   y: 45
 };
 
-const Bounds = { minX: 50, minY: 50, maxX: 750, maxY: 550 };
+// get current window size to make proper bounds
+let maxHeight = window.innerHeight;
+let maxWidth = window.innerWidth;
+let offset = 50;
+console.log('bounds', maxHeight, maxWidth);
+const Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
 
 export default class GameConstants {
 	static get GameStates() { return GameStates; }

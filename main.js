@@ -27,6 +27,7 @@ app.on('ready', function () {
 	var windowOptions = {
 		width: options.width || 1000,
 		height: options.height || 800,
+		autoHideMenuBar: true,
 		center: true,
 		resizable: false,
 		title: 'Nodejs Pong',

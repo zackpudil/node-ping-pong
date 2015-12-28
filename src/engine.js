@@ -10,6 +10,7 @@ import Score from './actors/score';
 import NetworkPaddle from './actors/paddles/network-paddle';
 import Ball from './actors/balls/player-ball';
 import NetworkBall from './actors/balls/network-ball';
+import Board from './actors/board';
 
 import electron from 'electron';
 import peer from './peer';
@@ -21,6 +22,7 @@ export default class Engine {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
 		this.score = new Score(renderer);
+		this.board = new Board(renderer);
 
 		// start game state as the menu
 		gameState.state = GameConstants.GameStates.menu;
@@ -63,20 +65,6 @@ export default class Engine {
 		electron.ipcRenderer.send('exitApp');
 	}
 
-	renderBounds() {
-		this.renderer.strokeColor('#000000');
-		this.renderer.fillColor('#FFFFFF');
-
-		this.renderer.line(Bounds.minX, Bounds.minY, Bounds.maxX, Bounds.minY);
-		this.renderer.line(Bounds.minX, Bounds.minY, Bounds.minX, Bounds.maxY);
-		this.renderer.line(Bounds.maxX, Bounds.minY, Bounds.maxX, Bounds.maxY);
-		this.renderer.line(Bounds.minX, Bounds.maxY, Bounds.maxX, Bounds.maxY);
-
-		this.renderer.line(Bounds.maxX/2 + 25, Bounds.minY, Bounds.maxX/2 + 25, Bounds.maxY);
-
-		this.renderer.circle(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, 25);
-	}
-
 	tick() {
 		// check game state to determine what to do.
 		if (gameState.state != GameConstants.GameStates.pause) {
@@ -88,7 +76,8 @@ export default class Engine {
 	 	if(gameState.state == GameConstants.GameStates.menu) {
 			this.menu.render();
 		} else if (gameState.state == GameConstants.GameStates.play) {
-			this.renderBounds();
+			this.board.render();
+			// this.renderBounds();
 			this.score.render();
 
 			this.paddles.forEach(p => {
