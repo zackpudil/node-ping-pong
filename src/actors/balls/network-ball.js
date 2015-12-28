@@ -13,7 +13,7 @@ export default class NetworkBall {
 
 		this.scoreCb = () => { };
 
-		peer.onBallPosition((pos) => {
+		peer.onCommand('ballPositionChange', (pos) => {
 			this.pos = pos;
 		});
 	}

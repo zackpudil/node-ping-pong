@@ -12,12 +12,12 @@ export default class PlayerPaddle {
 
 		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {
 			this.pos.y -= 40;
-			peer.move(-40);
+			peer.sendCommand('paddlePositionChange', -40);
 		});
 
 		userInput.addListener({ name: keyMaps.down, ctrl: false, shift: false }, () => {
 			this.pos.y += 40;
-			peer.move(40);
+			peer.sendCommand('paddlePositionChange', 40);
 		});
 	}
 

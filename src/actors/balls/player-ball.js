@@ -34,7 +34,7 @@ export default class PlayerBall {
 		this.pos.x += this.dir.x*this.speed;
 		this.pos.y += this.dir.y*this.speed;
 
-		peer.ballPosition(this.pos);
+		peer.sendCommand('ballPositionChange', this.pos);
 	}
 
 	didHit(pos, width, height) {

@@ -8,7 +8,7 @@ export default class NetworkPaddle {
 		this.pos = { x: x, y: y };
 		this.scale = scale;
 
-		peer.onMove((y) => {
+		peer.onCommand('paddlePositionChange', (y) => {
 			this.pos.y += y;
 		});
 	}
