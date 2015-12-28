@@ -35,9 +35,10 @@ export default class GameConstants {
   static get Bounds() {
     return Bounds;
   }
-  static resetBounds() {
-    let maxHeight = window.innerHeight;
-    let maxWidth = window.innerWidth;
+  static resetBounds(boundsObj) {
+    boundsObj = boundsObj || {};
+    let maxHeight = boundsObj.height || window.innerHeight;
+    let maxWidth = boundsObj.width || window.innerWidth;
     let offset = 50;
     Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
   }

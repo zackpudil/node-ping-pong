@@ -13,7 +13,7 @@ export default class Board {
 
 	resizeWindow(boundsObject) {
 		electron.ipcRenderer.send('resizeWindow', boundsObject);
-		GameConstants.resetBounds();
+		GameConstants.resetBounds(boundsObject);
 		this.bounds = GameConstants.Bounds;
 	}
 
@@ -31,19 +31,4 @@ export default class Board {
 
 		this.renderer.circle(this.bounds.maxX / 2 + 25, this.bounds.maxY / 2 + 25, 25);
 	}
-
-	// update() {
-  //   this.renderScore();
-	// }
-  //
-  // renderScore() {
-  //   this.renderer.fillColor('#000000');
-	// 	var font = '20pt Calibri';
-  //   this.renderer.text(this.pos.x, this.pos.y, this.getScore(), font);
-  // }
-  //
-  // getScore() {
-  //   let score = gameState.score;
-  //   return score.one + ' : ' + score.two;
-  // }
 }
