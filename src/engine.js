@@ -7,6 +7,7 @@ import gameState from './gameState';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
 import Ball from './actors/ball';
+import Score from './actors/score';
 import electron from 'electron';
 
 let Bounds = GameConstants.Bounds;
@@ -16,6 +17,7 @@ export default class Engine {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
 		this.ball = new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, renderer);
+		this.score = new Score(renderer);
 		this.paddles = [
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, renderer),
 			new PlayerPaddle(Bounds.maxX - 20, Bounds.maxX/2, renderer, { up: 'w', down: 's'}),
@@ -73,6 +75,7 @@ export default class Engine {
 			this.menu.render();
 		} else if (gameState.state == GameConstants.GameStates.play) {
 			this.renderBounds();
+			this.score.render();
 
 			this.paddles.forEach(p => {
 				p.update();

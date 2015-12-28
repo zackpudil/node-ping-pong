@@ -1,14 +1,33 @@
 import GameConstants from './game-constants';
 
 let state = null;
+let score = {
+  one: 0,
+  two: 0
+};
 
 class GameState {
-  static get state() {
+  get state() {
     return state;
   }
 
-  static set state(newState) {
+  set state(newState) {
     state = newState;
+  }
+
+  get score() {
+    return score;
+  }
+
+  set score(player) {
+    score[player] += 1;
+  }
+
+  resetScore() {
+    score = {
+      one: 0,
+      two: 0
+    };
   }
 }
 

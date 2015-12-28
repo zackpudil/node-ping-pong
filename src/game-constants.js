@@ -20,6 +20,11 @@ const KeyMap = {
   'w': 87
 };
 
+const ScorePosition = {
+  x: 375,
+  y: 45
+};
+
 const Bounds = { minX: 50, minY: 50, maxX: 750, maxY: 550 };
 
 export default class GameConstants {
@@ -27,4 +32,5 @@ export default class GameConstants {
 	static get Interval() { return Interval; }
 	static get Bounds() { return Bounds; }
 	static get KeyMap() { return KeyMap; }
+	static get ScorePosition() { return ScorePosition; }
 }

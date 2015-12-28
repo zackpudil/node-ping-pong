@@ -1,5 +1,6 @@
 import ModelRenderer from '../model-renderer';
 import GameConstants from '../game-constants';
+import gameState from '../gameState';
 
 export default class Ball {
 
@@ -12,8 +13,6 @@ export default class Ball {
 		this.speed = 1.5;
 
 		this.scale = scale;
-
-		this.scoreCb = () => { };
 	}
 
 	render() {
@@ -26,8 +25,9 @@ export default class Ball {
 		}
 
 		if(this.pos.x > GameConstants.Bounds.maxX-this.scale || this.pos.x < GameConstants.Bounds.minY) {
+			let sideThatScored = this.pos.x > GameConstants.Bounds.maxX-this.scale ? 'two' : 'one';
+			this.scored(sideThatScored);
 			this.reset();
-			this.scoreCb();
 		}
 
 		this.pos.x += this.dir.x*this.speed;
@@ -51,7 +51,7 @@ export default class Ball {
 		this.speed = 2;
 	}
 
-	onScore(scoreCb) {
-		this.scoreCb = scoreCb;
+	scored(sideThatScored) {
+		gameState.score = sideThatScored;
 	}
 }
