@@ -26,7 +26,6 @@ const ScorePosition = {
 };
 
 let Bounds;
-resetBounds();
 
 export default class GameConstants {
 	static get GameStates() { return GameStates; }
@@ -43,3 +42,5 @@ export default class GameConstants {
     Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
   }
 }
+
+GameConstants.resetBounds();
