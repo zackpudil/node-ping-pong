@@ -54,5 +54,5 @@ ipcMain.on('exitApp', function() {
 ipcMain.on('resizeWindow', function(evt, boundsObject) {
 	console.log('resize browser window', boundsObject);
 	mainWindow.setSize(boundsObject.width, boundsObject.height);
-	// mainWindow.setContentSize(boundsObject.width, boundsObject.height);
+	mainWindow.setContentSize(boundsObject.width, boundsObject.height);
 });
