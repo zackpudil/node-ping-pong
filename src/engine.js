@@ -19,7 +19,6 @@ export default class Engine {
 	constructor(renderer) {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
-		this.score = new Score(renderer);
 
 		// start game state as the menu
 		gameState.state = GameConstants.GameStates.menu;
@@ -30,7 +29,8 @@ export default class Engine {
 			startGameCb: this.startGame.bind(this),
 			exitGameCb: this.endGame.bind(this)
 		});
-		this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
+
+		this.menu.render();
 	}
 
 	startGame(joined) {
@@ -51,14 +51,17 @@ export default class Engine {
 		];
 
 		this.board = new Board(this.renderer);
-
-		gameState.state = GameConstants.GameStates.play;
-		this.menu.deregister();
+		this.score = new Score(this.renderer);
 
 		this.pauseMenu = new PauseMenu(this.renderer, {
 			startGameCb: this.startGame.bind(this),
 			exitGameCb: this.endGame.bind(this)
 		});
+
+		gameState.state = GameConstants.GameStates.play;
+		this.menu.deregister();
+
+		this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
 	}
 
 	endGame() {
@@ -68,15 +71,10 @@ export default class Engine {
 
 	tick() {
 		// check game state to determine what to do.
-		if (gameState.state != GameConstants.GameStates.pause) {
+	 	if(gameState.state == GameConstants.GameStates.pause) {
+	 		this.pauseMenu.render();
+	 	} else if (gameState.state == GameConstants.GameStates.play) {
 			this.renderer.clear();
-		} else {
-			this.pauseMenu.render();
-		}
-
-	 	if(gameState.state == GameConstants.GameStates.menu) {
-			this.menu.render();
-		} else if (gameState.state == GameConstants.GameStates.play) {
 			this.board.render();
 			// this.renderBounds();
 			this.score.render();

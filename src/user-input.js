@@ -19,13 +19,14 @@ class UserInputCoordinator {
 		// A singleton instance
 		if(!instance) {
 			instance = this;
-			document.onkeydown = this.handleInput;
+			document.onkeyup = (e) => this.handleInput(e, 'up');
+			document.onkeydown = (e) => this.handleInput(e, 'down');
 		}
 
 		return instance;
 	}
 
-	handleInput(e) {
+	handleInput(e, pressType) {
 		// if the app is expecting a string to be entered, don't run any handlers.
 		if(UserInputCoordinator.streamMode)
 			return;
@@ -33,20 +34,22 @@ class UserInputCoordinator {
 		let activatedListeners = UserInputCoordinator.inputHandlers.filter(l => {
 			return GameConstants.KeyMap[l.key.name] == e.keyCode
 				&& l.key.ctrl == e.ctrlKey
-				&& l.key.shift == e.shiftKey;
+				&& l.key.shift == e.shiftKey
+				&& l.pressType == pressType;
 		});
 
 		activatedListeners.forEach(l => l.handle());
 	}
 
-	addListener(key, handler) {
+	addListener(key, handler, pressType = 'down') {
 		// ctrl and shift are optional values, default to false if not passed.
 		key.ctrl = key.ctrl || false;
 		key.shift = key.shift || false;
 
 		UserInputCoordinator.inputHandlers.push({
 			key: key,
-			handle: handler
+			handle: handler,
+			pressType: pressType
 		});
 	}
 

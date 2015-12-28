@@ -18,17 +18,20 @@
 	<script>
 		var canvas = document.getElementById('canvas'),
 			context = canvas.getContext('2d');
-		var pp = require("./dist/app");
-		pp.default(context);
-
-		window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
 			console.log('resized window', window.innerHeight, window.innerWidth);
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
+    
     resizeCanvas();
+
+		var pp = require("./dist/app");
+		pp.default(context);
+
+		window.addEventListener('resize', resizeCanvas, false);
+
     // canvas.width = window.innerWidth;
     // canvas.height = window.innerHeight;
 	</script>
