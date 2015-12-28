@@ -24,6 +24,7 @@
 		window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
+			console.log('resized window', window.innerHeight, window.innerWidth);
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
