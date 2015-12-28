@@ -30,7 +30,6 @@ class UserInputCoordinator {
 		if(UserInputCoordinator.streamMode)
 			return;
 
-		console.log('handle key input', e.keyCode);
 		let activatedListeners = UserInputCoordinator.inputHandlers.filter(l => {
 			return GameConstants.KeyMap[l.key.name] == e.keyCode
 				&& l.key.ctrl == e.ctrlKey
