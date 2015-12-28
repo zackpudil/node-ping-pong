@@ -14,6 +14,7 @@ export default class Board {
 	resizeWindow(boundsObject) {
 		console.log('board resize', boundsObject);
 		electron.ipcRenderer.send('resize', boundsObject);
+		this.bounds = GameConstants.Bounds;
 	}
 
 	render() {
