@@ -11,13 +11,13 @@ export default class PeerCoordinator {
 		net.createServer((sock) => {
 			PeerCoordinator.peer = sock;
 			cb();
-		}).listen(80);
+		}).listen(3000);
 	}	
 
 	static join(host, cb) {
 		PeerCoordinator.peer = new net.Socket();
 
-		PeerCoordinator.peer.connect(80, host, () => {
+		PeerCoordinator.peer.connect(3000, host, () => {
 			cb();
 		});
 	}
