@@ -1,9 +1,9 @@
-import Menu from './menu';
-import PauseMenu from './pauseMenu';
 import userInput from './user-input';
 import GameConstants from './game-constants';
-
 import gameState from './gameState';
+
+import Menu from './actors/menu';
+import PauseMenu from './actors/pauseMenu';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import AIPaddle from './actors/paddles/ai-paddle';
 import Score from './actors/score';

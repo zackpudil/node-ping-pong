@@ -50,3 +50,7 @@ app.on('ready', function () {
 ipcMain.on('exitApp', function() {
 	app.quit();
 });
+
+ipcMain.on('resizeWindow', function(boundsObject) {
+	mainWindow.setSize(boundsObject.width, boundsObject.height);
+});

@@ -1,6 +1,7 @@
-import userInput from './user-input';
-import peers from './peer';
+import userInput from '../user-input';
+import peers from '../peer';
 import smalltalk from 'smalltalk';
+import GameConstants from '../game-constants';
 
 export default class Menu {
 
@@ -12,7 +13,8 @@ export default class Menu {
 		userInput.addListener({ name: '1' }, () =>  {
 			this.isWaiting = true;
 			peers.create(() => {
-				this.gameStartCb(false)
+				this.gameStartCb(false);
+				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX, height: GameConstants.Bounds.maxY });
 			});
 		});
 

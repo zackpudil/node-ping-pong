@@ -1,7 +1,7 @@
-import userInput from './user-input';
-import GameConstants from './game-constants';
-import gameState from './gameState';
-import peer from './peer';
+import userInput from '../user-input';
+import GameConstants from '../game-constants';
+import gameState from '../gameState';
+import peer from '../peer';
 
 export default class PauseMenu {
 
