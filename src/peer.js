@@ -18,7 +18,8 @@ export default class PeerCoordinator {
 	static join(host, cb) {
 		PeerCoordinator.peer = new JsonSocket(new net.Socket());
 
-		PeerCoordinator.peer.connect(3000, host, () => {
+		PeerCoordinator.peer.connect(3000, host);
+		PeerCoordinator.peer.on('connect', () => {
 			cb();
 		});
 	}
