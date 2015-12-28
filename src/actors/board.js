@@ -8,7 +8,7 @@ export default class Board {
     this.renderer = renderer;
     this.bounds = GameConstants.Bounds;
 
-		peers.onCommand('resizeWindow', this.resizeWindow);
+		peers.onCommand('resizeWindow', this.resizeWindow.bind(this));
 	}
 
 	resizeWindow(boundsObject) {
