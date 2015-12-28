@@ -14,7 +14,7 @@ export default class Menu {
 			this.isWaiting = true;
 			peers.create(() => {
 				this.gameStartCb(false);
-				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX, height: GameConstants.Bounds.maxY });
+				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX + 50, height: GameConstants.Bounds.maxY + 50 });
 			});
 		});
 
