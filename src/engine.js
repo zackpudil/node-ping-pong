@@ -15,8 +15,6 @@ import Board from './actors/board';
 import electron from 'electron';
 import peer from './peer';
 
-let Bounds = GameConstants.Bounds;
-
 export default class Engine {
 	constructor(renderer) {
 		this.renderer = renderer;
@@ -36,6 +34,8 @@ export default class Engine {
 	}
 
 	startGame(joined) {
+		let Bounds = GameConstants.Bounds;
+
 		this.ball = joined ?
 			new NetworkBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer) :
 			new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
