@@ -1,4 +1,5 @@
 import net from 'net';
+import JsonSocket from 'json-socket';
 
 let peer = null;
 
@@ -9,13 +10,13 @@ export default class PeerCoordinator {
 
 	static create(cb) {
 		net.createServer((sock) => {
-			PeerCoordinator.peer = sock;
+			PeerCoordinator.peer = new JsonSocket(sock);
 			cb();
 		}).listen(3000);
 	}	
 
 	static join(host, cb) {
-		PeerCoordinator.peer = new net.Socket();
+		PeerCoordinator.peer = new JsonSocket(new net.Socket());
 
 		PeerCoordinator.peer.connect(3000, host, () => {
 			cb();
@@ -23,28 +24,24 @@ export default class PeerCoordinator {
 	}
 
 	static ballPosition(pos) {
-		PeerCoordinator.peer.write(JSON.stringify({ pos: pos, message: 'ball' }));
+		PeerCoordinator.peer.sendMessage({ pos: pos, message: 'ball' });
 	}
 
 	static onBallPosition(cb) {
-		PeerCoordinator.peer.on('data', (data) => {
-			let dataParsed = JSON.parse(data);
-
-			if(dataParsed.message === 'ball')
-				cb(dataParsed.pos);
-		})
+		PeerCoordinator.peer.on('message', (data) => {
+			if(data.message === 'ball')
+				cb(data.pos);
+		});
 	}
 
 	static onMove(cb) {
-		PeerCoordinator.peer.on('data', (data) => {
-			let dataParsed = JSON.parse(data);
-
-			if(dataParsed.message === 'move')
-				cb(dataParsed.y);
+		PeerCoordinator.peer.on('message', (data) => {
+			if(data.message === 'move')
+				cb(data.y);
 		});
 	}
 
 	static move(y) {
-		PeerCoordinator.peer.write(JSON.stringify({ message: 'move', y: y }));
+		PeerCoordinator.peer.sendMessage({ message: 'move', y: y });
 	}
 }
