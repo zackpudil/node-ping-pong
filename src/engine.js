@@ -22,7 +22,6 @@ export default class Engine {
 		this.renderer = renderer;
 		this.menu = new Menu(renderer);
 		this.score = new Score(renderer);
-		this.board = new Board(renderer);
 
 		// start game state as the menu
 		gameState.state = GameConstants.GameStates.menu;
@@ -50,6 +49,8 @@ export default class Engine {
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
 			new NetworkPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer)
 		];
+
+		this.board = new Board(this.renderer);
 
 		gameState.state = GameConstants.GameStates.play;
 		this.menu.deregister();

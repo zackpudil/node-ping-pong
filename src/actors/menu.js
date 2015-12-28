@@ -14,9 +14,7 @@ export default class Menu {
 			this.isWaiting = true;
 			peers.create(() => {
 				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX + 50, height: GameConstants.Bounds.maxY + 50 });
-				setTimeout(() => {
-					this.gameStartCb(false);
-				}, 500);
+				this.gameStartCb(false);
 			});
 		});
 
@@ -24,7 +22,9 @@ export default class Menu {
 
 			smalltalk.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
 			.then(
-				(value) => peers.join(value, () => this.gameStartCb(true)),
+				(value) => peers.join(value, () => {
+					setTimeout(() => this.gameStartCb(true), 500);
+				}),
 				() =>  this.gameEndCb());
 		});
 
