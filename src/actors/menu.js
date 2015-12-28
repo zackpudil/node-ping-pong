@@ -13,8 +13,10 @@ export default class Menu {
 		userInput.addListener({ name: '1' }, () =>  {
 			this.isWaiting = true;
 			peers.create(() => {
-				this.gameStartCb(false);
 				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX + 50, height: GameConstants.Bounds.maxY + 50 });
+				setTimeout(function() {
+					this.gameStartCb(false);
+				}, 500);
 			});
 		});
 
