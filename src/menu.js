@@ -20,7 +20,7 @@ export default class Menu {
 
 			smalltalk.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
 			.then(
-				(value) => peers.join(value, 3000, () => this.gameStartCb(true)),
+				(value) => peers.join(value, () => this.gameStartCb(true)),
 				() =>  this.gameEndCb());
 		});
 
