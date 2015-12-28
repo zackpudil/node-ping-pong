@@ -56,5 +56,6 @@ export default class PlayerBall {
 
 	scored(sideThatScored) {
 		gameState.score = sideThatScored;
+		peer.sendCommand('scored', sideThatScored);
 	}
 }

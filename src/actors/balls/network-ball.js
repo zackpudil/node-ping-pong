@@ -1,5 +1,6 @@
 import ModelRenderer from '../../model-renderer';
 import peer from '../../peer';
+import gameState from '../../gameState';
 
 export default class NetworkBall {
 
@@ -11,7 +12,9 @@ export default class NetworkBall {
 
 		this.scale = scale;
 
-		this.scoreCb = () => { };
+		peer.onCommand('scored', (playerWhoScored) => {
+			this.scored(playerWhoScored);
+		});
 
 		peer.onCommand('ballPositionChange', (pos) => {
 			this.pos = pos;
@@ -28,7 +31,7 @@ export default class NetworkBall {
 
 	}
 
-	onScore(scoreCb) {
-		this.scoreCb = scoreCb;
+	scored(sideThatScored) {
+		gameState.score = sideThatScored;
 	}
 }
