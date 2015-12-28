@@ -36,7 +36,12 @@ export default class Engine {
 			new NetworkBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer) :
 			new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
-		this.paddles = [
+		this.paddles = joined ?
+		[
+			new NetworkPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
+			new PlayerPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer)
+		] :
+		[
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
 			new NetworkPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer)
 		];

@@ -14,8 +14,7 @@ export default class NetworkBall {
 		this.scoreCb = () => { };
 
 		peer.onBallPosition((pos) => {
-			this.pos.y = pos.y;
-			this.pos.x = this.startX + (this.startX - (pos.x + this.scale));
+			this.pos = pos;
 		});
 	}
 

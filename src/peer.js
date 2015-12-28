@@ -11,7 +11,7 @@ export default class PeerCoordinator {
 		net.createServer((sock) => {
 			PeerCoordinator.peer = sock;
 			cb();
-		}).listen(80, 'localhost');
+		}).listen(80);
 	}	
 
 	static join(host, cb) {
