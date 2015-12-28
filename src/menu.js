@@ -1,5 +1,6 @@
 import userInput from './user-input';
 import peers from './peer';
+import smalltalk from 'smalltalk';
 
 export default class Menu {
 
@@ -16,7 +17,11 @@ export default class Menu {
 		});
 
 		userInput.addListener({ name: '2' }, () => {
-			peers.join('localhost', 3000, () => this.gameStartCb(true));
+
+			smalltalk.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
+			.then(
+				(value) => peers.join(value, 3000, () => this.gameStartCb(true)),
+				() =>  this.gameEndCb());
 		});
 
 		userInput.addListener({ name: '3' }, () => this.gameEndCb());

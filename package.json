@@ -12,7 +12,8 @@
     "electron-debug": "^0.5.1",
     "electron-prebuilt": "^0.36.1",
     "keypress": "^0.2.1",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "smalltalk": "^1.6.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",

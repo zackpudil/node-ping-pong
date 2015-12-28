@@ -1,14 +1,15 @@
-import ModelRenderer from '../model-renderer';
-import GameConstants from '../game-constants';
+import ModelRenderer from '../../model-renderer';
+import GameConstants from '../../game-constants';
+import peer from '../../peer';
 
-export default class Ball {
+export default class PlayerBall {
 
-	constructor(x, y, renderer, dir, scale = 10) {
+	constructor(x, y, renderer, scale = 10) {
 		this.modelRenderer = new ModelRenderer(renderer);
 
 		this.startPos = { x: x, y: y };
 		this.pos = { x: x, y: y };
-		this.dir = { x: dir, y: -1 };
+		this.dir = { x: -1, y: -1 };
 		this.speed = 1.5;
 
 		this.scale = scale;
@@ -32,6 +33,8 @@ export default class Ball {
 
 		this.pos.x += this.dir.x*this.speed;
 		this.pos.y += this.dir.y*this.speed;
+
+		peer.ballPosition(this.pos);
 	}
 
 	didHit(pos, width, height) {

@@ -6,8 +6,10 @@ import GameConstants from './game-constants';
 import gameState from './gameState';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import NetworkPaddle from './actors/paddles/network-paddle';
-import Ball from './actors/ball';
+import Ball from './actors/balls/player-ball';
+import NetworkBall from './actors/balls/network-ball';
 import electron from 'electron';
+import peer from './peer';
 
 let Bounds = GameConstants.Bounds;
 
@@ -30,8 +32,10 @@ export default class Engine {
 	}
 
 	startGame(joined) {
-		var dir = joined ? 1 : -1;
-		this.ball = new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer, dir);
+		this.ball = joined ?
+			new NetworkBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer) :
+			new Ball(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
+
 		this.paddles = [
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
 			new NetworkPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer)
@@ -73,7 +77,7 @@ export default class Engine {
 			this.pauseMenu.render();
 		}
 
-	 if(gameState.state == GameConstants.GameStates.menu) {
+	 	if(gameState.state == GameConstants.GameStates.menu) {
 			this.menu.render();
 		} else if (gameState.state == GameConstants.GameStates.play) {
 			this.renderBounds();

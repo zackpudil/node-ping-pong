@@ -8,9 +8,8 @@ export default class NetworkPaddle {
 		this.pos = { x: x, y: y };
 		this.scale = scale;
 
-		peer.onMove((p, d) => {
-			this.pos.y += p.y;
-			d(null);
+		peer.onMove((y) => {
+			this.pos.y += y;
 		});
 	}
 
