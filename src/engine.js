@@ -26,11 +26,29 @@ export default class Engine {
 
 	start() {
 		this.menu.onGameStart({
-			startGameCb: this.startGame.bind(this),
+			createGameCb: this.createGame.bind(this),
+			joinGameCb: this.joinGame.bind(this),
 			exitGameCb: this.endGame.bind(this)
 		});
 
 		this.menu.render();
+	}
+
+	joinGame(ipAddress) {
+		peer.join(ipAddress, () => {
+			peer.onCommand('resizeWindow', (bounds) => {
+				electron.ipcRenderer.send('resizeWindow', bounds);
+				GameConstants.resetBounds(bounds);
+				this.startGame(true)
+			});
+		})
+	}
+
+	createGame() {
+		peer.create(() => {
+				peer.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX + 50, height: GameConstants.Bounds.maxY + 50 });
+				this.startGame(false);
+			});
 	}
 
 	startGame(joined) {

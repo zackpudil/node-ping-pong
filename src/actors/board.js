@@ -7,14 +7,6 @@ export default class Board {
 	constructor(renderer) {
     this.renderer = renderer;
     this.bounds = GameConstants.Bounds;
-
-		peers.onCommand('resizeWindow', this.resizeWindow.bind(this));
-	}
-
-	resizeWindow(boundsObject) {
-		electron.ipcRenderer.send('resizeWindow', boundsObject);
-		GameConstants.resetBounds(boundsObject);
-		this.bounds = GameConstants.Bounds;
 	}
 
 	render() {

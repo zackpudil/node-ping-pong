@@ -2,6 +2,7 @@ import userInput from '../user-input';
 import peers from '../peer';
 import smalltalk from 'smalltalk';
 import GameConstants from '../game-constants';
+import electron from 'electron';
 
 export default class Menu {
 
@@ -11,23 +12,17 @@ export default class Menu {
 
 		userInput.addListener({ name: '1' }, () =>  {
 			this.renderer.text(20, 520, 'Waiting for players to join.', 'italic 20pt Calibri');
-			peers.create(() => {
-				peers.sendCommand('resizeWindow', { width: GameConstants.Bounds.maxX + 50, height: GameConstants.Bounds.maxY + 50 });
-				this.gameStartCb(false);
-			});
+			this.createGame();
 		}, 'up');
 
 		userInput.addListener({ name: '2' }, () => {
 
 			smalltalk.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
-				.then(
-					(value) => peers.join(value, () => {
-						setTimeout(() => this.gameStartCb(true), 500);
-					}),
-					() =>  this.gameEndCb());
+				.then((value) => this.joinGame(value));
+
 		}, 'up');
 
-		userInput.addListener({ name: '3' }, () => this.gameEndCb(), 'up');
+		userInput.addListener({ name: '3' }, () => this.gameEnd(), 'up');
 	}
 
 	render() {
@@ -46,8 +41,9 @@ export default class Menu {
 	}
 
 	onGameStart(options) {
-		this.gameStartCb = options.startGameCb;
-		this.gameEndCb = options.exitGameCb;
+		this.joinGame = options.joinGameCb;
+		this.createGame = options.createGameCb; 
+		this.gameEnd = options.exitGameCb;
 	}
 
 	deregister() {
