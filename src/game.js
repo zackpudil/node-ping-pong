@@ -47,7 +47,7 @@ export default class Game {
 
 		this.paddles = [
 			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
-			new AIPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer)
+			new AIPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer, this.ball)
 		];
 	}
 }
