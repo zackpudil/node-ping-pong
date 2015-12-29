@@ -2,7 +2,7 @@
   "name": "node-ping-pong",
   "version": "0.0.0",
   "description": "A multiplayer ping-pong game written with Node.js",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
