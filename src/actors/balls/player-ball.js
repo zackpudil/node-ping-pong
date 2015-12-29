@@ -38,7 +38,6 @@ export default class PlayerBall {
 	}
 
 	updateNetworkBall() {
-		console.log("sending ball update command.");
 		peer.sendCommand('ballUpdate', {
 			speed: this.speed,
 			dir: this.dir,
