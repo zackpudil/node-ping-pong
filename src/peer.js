@@ -29,7 +29,8 @@ export default class PeerCoordinator {
 	}
 
 	static sendCommand(name, data) {
-		PeerCoordinator.peer.sendMessage({ name: name, data: data });
+		if(PeerCoordinator.peer != null)
+			PeerCoordinator.peer.sendMessage({ name: name, data: data });
 	}
 
 	static onCommand(name, callback) {

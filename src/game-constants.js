@@ -14,6 +14,7 @@ const KeyMap = {
 	'1': 49,
 	'2': 50,
   '3': 51,
+  '4': 52,
   'm': 77,
   'p': 80,
   's': 83,
@@ -31,7 +32,12 @@ export default class GameConstants {
 	static get GameStates() { return GameStates; }
 	static get Interval() { return Interval; }
 	static get KeyMap() { return KeyMap; }
-	static get ScorePosition() { return ScorePosition; }
+	static get ScorePosition() { 
+    return {
+      x: GameConstants.Bounds.maxX/2,
+      y: 45
+    }; 
+  }
   static get Bounds() {
     return Bounds;
   }
