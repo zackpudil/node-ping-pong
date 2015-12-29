@@ -21,11 +21,6 @@ const KeyMap = {
   'w': 87
 };
 
-const ScorePosition = {
-  x: 375,
-  y: 45
-};
-
 let Bounds;
 
 export default class GameConstants {
