@@ -9,8 +9,6 @@ export default class NetworkBall {
 		this.startX = x;
 
 		this.pos = { x: x, y: y };
-		this.speed = 0;
-		this.dir = { x: 0, y: 0 };
 
 		this.scale = scale;
 
@@ -18,10 +16,8 @@ export default class NetworkBall {
 			this.scored(playerWhoScored);
 		});
 
-		peer.onCommand('ballUpdate', (ball) => {
-			this.speed = ball.speed;
-			this.dir = ball.dir;
-			this.pos = ball.pos;
+		peer.onCommand('ballPositionChange', (pos) => {
+			this.pos = pos;
 		});
 	}
 
@@ -29,10 +25,7 @@ export default class NetworkBall {
 		this.modelRenderer.renderModel("ball", this.pos, '#00cc66', this.scale)
 	}
 
-	update() { 
-		this.pos.x += this.dir.x*this.speed;
-		this.pos.y += this.dir.y*this.speed;
-	}
+	update() { }
 
 	didHit(pos, width, height) {
 
