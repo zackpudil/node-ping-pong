@@ -73,11 +73,6 @@ export default class Engine {
 		this.gameLoop = setInterval(this.tick.bind(this), GameConstants.Interval);
 	}
 
-	endGame() {
-		// signal to the main process that we want to close the app.
-		
-	}
-
 	tick() {
 		// check game state to determine what to do.
 	 	if(gameState.state == GameConstants.GameStates.pause) {
