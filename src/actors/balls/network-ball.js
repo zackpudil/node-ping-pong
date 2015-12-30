@@ -27,9 +27,7 @@ export default class NetworkBall {
 
 	update() { }
 
-	didHit(pos, width, height) {
-
-	}
+	collide(pos, width, height) { }
 
 	scored(sideThatScored) {
 		gameState.score = sideThatScored;

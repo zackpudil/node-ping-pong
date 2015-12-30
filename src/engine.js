@@ -85,7 +85,7 @@ export default class Engine {
 
 			this.game.paddles.forEach(p => {
 				p.update();
-				this.game.ball.didHit(p.pos, p.scale, p.scale*6);
+				this.game.ball.collide(p.pos, p.scale, p.scale*6);
 				p.render()
 			});
 

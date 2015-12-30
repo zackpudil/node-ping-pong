@@ -37,7 +37,7 @@ export default class PlayerBall {
 		peer.sendCommand('ballPositionChange', this.pos);
 	}
 
-	didHit(pos, width, height) {
+	collide(pos, width, height) {
 		if(this.pos.x < pos.x + width &&
 			this.pos.x + this.scale > pos.x &&
 			this.pos.y < pos.y + height &&

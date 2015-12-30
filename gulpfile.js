@@ -1,9 +1,7 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
-var browserify = require("gulp-browserify");
-var rename = require("gulp-rename");
 
-gulp.task("babelify", function () {
+gulp.task("build", function () {
 	return gulp.src("src/**/*.js")
 		.pipe(babel({
 			presets: ['es2015']
@@ -11,6 +9,6 @@ gulp.task("babelify", function () {
 		.pipe(gulp.dest("./dist"));
 });
 
-gulp.task("default", ["babelify"], function () {
-	gulp.watch('src/**/*.js', ['babelify']);
+gulp.task("default", ["build"], function () {
+	gulp.watch('src/**/*.js', ['build']);
 });
