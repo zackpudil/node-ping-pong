@@ -8,7 +8,7 @@ export default class AIPaddle {
 		this.modelRenderer = new ModelRenderer(render);
 
 		this.ball = ball;
-		this.maxTicks = 11 - Math.max(Math.min(difficulty, 10), 1);
+		this.maxTicks = 11 - Math.max(Math.min(difficulty, 11), 1);
 		this.ticks = 0;
 		this.onRightSide = onRightSide;
 	}
