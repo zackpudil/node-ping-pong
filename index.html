@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<canvas id="canvas" style="background-color: #000000"></canvas>
+		<canvas id="canvas"></canvas>
 		 <!-- width="800" height="600"></canvas> -->
 	</body>
 
@@ -19,9 +19,11 @@
 		var canvas = document.getElementById('canvas'),
 			context = canvas.getContext('2d');
 
+
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+			canvas.style.backgroundColor = '#000000';
     }
     
     resizeCanvas();

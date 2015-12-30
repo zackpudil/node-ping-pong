@@ -1,10 +1,9 @@
-import GameConstants from '../game-constants';
+import gameConstants from '../game-constants';
 import gameState from '../gameState';
 
 export default class Score {
 	constructor(renderer, scale = 10) {
     this.renderer = renderer;
-    this.pos = GameConstants.ScorePosition;
     this.scale = scale;
 	}
 
@@ -19,7 +18,7 @@ export default class Score {
   renderScore() {
     this.renderer.fillColor('#FFFFFF');
 		var font = '20pt Calibri';
-    this.renderer.text(this.pos.x, this.pos.y, this.getScore(), font);
+    this.renderer.text(gameConstants.ScorePosition.x, gameConstants.ScorePosition.y, this.getScore(), font);
   }
 
   getScore() {

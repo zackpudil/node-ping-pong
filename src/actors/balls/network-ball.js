@@ -22,7 +22,7 @@ export default class NetworkBall {
 	}
 
 	render() {
-		this.modelRenderer.renderModel("ball", this.pos, '#00cc66', this.scale)
+		this.modelRenderer.renderModel("ball", this.pos, '#FFFFFF', this.scale)
 	}
 
 	update() { }

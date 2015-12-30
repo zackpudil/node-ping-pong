@@ -64,7 +64,7 @@ export default class Engine {
 	startGame() {
 		this.pauseMenu = new PauseMenu(this.renderer, {
 			startGameCb: this.startGame.bind(this),
-			exitGameCb: this.endGame.bind(this)
+			exitGameCb: () => electron.ipcRenderer.send('exitApp')
 		});
 
 		gameState.state = GameConstants.GameStates.play;

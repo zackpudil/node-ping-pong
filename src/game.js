@@ -5,11 +5,10 @@ import NetworkBall from './actors/balls/network-ball';
 import AIPaddle from './actors/paddles/ai-paddle';
 import PlayerPaddle from './actors/paddles/player-paddle';
 import NetworkPaddle from './actors/paddles/network-paddle';
-
 import gameConstants from './game-constants';
 import peer from './peer';
 
-let Bounds = gameConstants.Bounds;
+
 
 export default class Game {
 
@@ -24,6 +23,7 @@ export default class Game {
 	}
 
 	createActorsForHostedGame() {
+		let Bounds = gameConstants.Bounds;
 		this.ball = new PlayerBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
 		this.paddles = [
@@ -33,7 +33,7 @@ export default class Game {
 	}
 
 	createActorsForJoinedGame() {
-
+		let Bounds = gameConstants.Bounds;
 		this.ball = new NetworkBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
 		this.paddles = [
@@ -43,6 +43,7 @@ export default class Game {
 	}
 
 	createActorsForAIGame(difficulty) {
+		let Bounds = gameConstants.Bounds;
 		this.ball = new PlayerBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
 		this.paddles = [
@@ -52,6 +53,7 @@ export default class Game {
 	}
 
 	createActorsForShow() {
+		let Bounds = gameConstants.Bounds;
 		this.ball = new PlayerBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
 		this.paddles = [
