@@ -1,10 +1,5 @@
-let currentColor = {
-	stroke: '#000000',
-	fill: '#000000'
-};
-
 /*
-	Wrapper class of the axel canvas. Initial need was for pushing/poping colors.
+	Wrapper class of the html5 canvas.
 */
 export default class Renderer {
 
@@ -12,16 +7,16 @@ export default class Renderer {
 		this.canvas = canvas;
 	}
 
-	get currentColor() { return currentColor; }
-
 	strokeColor(color) {
-		currentColor.stroke = color;
 		this.canvas.strokeStyle= color;
 	}
 
 	fillColor(color) {
-		currentColor.fill = color;
 		this.canvas.fillStyle = color;
+	}
+
+	lineWidth(width) {
+		this.canvas.lineWidth = width;
 	}
 
 	box(x, y, width, height) {

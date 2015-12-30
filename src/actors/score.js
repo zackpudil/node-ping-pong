@@ -17,7 +17,7 @@ export default class Score {
 	}
 
   renderScore() {
-    this.renderer.fillColor('#000000');
+    this.renderer.fillColor('#FFFFFF');
 		var font = '20pt Calibri';
     this.renderer.text(this.pos.x, this.pos.y, this.getScore(), font);
   }

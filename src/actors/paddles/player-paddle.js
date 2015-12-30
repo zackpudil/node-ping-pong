@@ -22,7 +22,7 @@ export default class PlayerPaddle {
 	}
 
 	render() {
-		this.renderer.renderModel('paddle', this.pos, '#00cc66', this.scale);
+		this.renderer.renderModel('paddle', this.pos, '#FFFFFF', this.scale);
 	}
 
 	update() {

@@ -10,29 +10,15 @@ export default class Menu {
 		this.renderer = renderer;
 		this.ipAddress = "";
 
-		userInput.addListener({ name: '1' }, () =>  {
-			this.renderer.text(20, 550, 'Waiting for players to join.', 'italic 20pt Calibri');
-			this.createGame();
-		}, 'up');
-
-		userInput.addListener({ name: '2' }, () => {
-
-			smalltalk.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
-				.then((value) => this.joinGame(value));
-
-		}, 'up');
-
-		userInput.addListener({ name: '3' }, () => this.gameEnd(), 'up');
-		userInput.addListener({ name: '4' }, () => this.aiGame(), 'up');
+		this.register();
 	}
 
 	render() {
-		let font = 'italic 20pt Calibri';
-		this.renderer.fillColor('#cc00ff');
-		this.renderer.strokeColor('#cc00ff');
+		let font = '20pt "Courier New"';
+		this.renderer.fillColor('#FFFFFF');
+		this.renderer.strokeColor('#FFFFFF');
 
-		this.renderer.text(20, 250, 'Ping', 'italic 140pt Calibri');
-		this.renderer.text(30, 400, 'Pong', 'italic 140pt Calibri');
+		this.renderer.text(20, 250, 'Pong', '140pt "Courier New"');
 
 		//Draw options
 		this.renderer.text(20, 430, 'Press 1 to start a game.', font);
@@ -47,6 +33,30 @@ export default class Menu {
 		this.createGame = options.createGameCb;
 		this.aiGame = options.startAIGameCb;
 		this.gameEnd = options.exitGameCb;
+	}
+
+	register() {
+		userInput.addListener({ name: '1' }, () =>  {
+			this.deregister();
+			this.renderer.text(20, 550, 'Waiting for players to join.', 'italic 20pt Calibri');
+			this.createGame();
+		}, 'up');
+
+		userInput.addListener({ name: '2' }, () => {
+			this.deregister();
+			smalltalk
+				.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
+				.then((value) => this.joinGame(value), () => this.register());
+		}, 'up');
+
+		userInput.addListener({ name: '3' }, () => this.gameEnd(), 'up');
+
+		userInput.addListener({ name: '4' }, () => {
+			this.deregister();
+			smalltalk
+				.prompt('AI Difficulty', 'Please choose AI difficulty (1 - 10).', '7')
+				.then((value) => this.aiGame(value), () => this.register());
+		}, 'up');
 	}
 
 	deregister() {

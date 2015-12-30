@@ -18,6 +18,6 @@ export default class NetworkPaddle {
 	}
 
 	render() {
-		this.modelRenderer.renderModel('paddle', this.pos, '#00cc66', this.scale);
+		this.modelRenderer.renderModel('paddle', this.pos, '#FFFFFF', this.scale);
 	}
 }

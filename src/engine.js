@@ -31,8 +31,8 @@ export default class Engine {
 		this.menu.render();
 	}
 
-	startAIGame() {
-		this.game.createActorsForAIGame();
+	startAIGame(difficulty) {
+		this.game.createActorsForAIGame(difficulty);
 		this.startGame();
 	}
 

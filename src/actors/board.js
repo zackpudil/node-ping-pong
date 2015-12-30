@@ -10,8 +10,9 @@ export default class Board {
 	}
 
 	render() {
-    this.renderer.strokeColor('#000000');
-		this.renderer.fillColor('#FFFFFF');
+    this.renderer.strokeColor('#FFFFFF');
+		this.renderer.fillColor('#000000');
+		this.renderer.lineWidth(5);
 
 		this.renderer.line(this.bounds.minX, this.bounds.minY, this.bounds.maxX, this.bounds.minY); // top line
 		this.renderer.line(this.bounds.minX, this.bounds.minY, this.bounds.minX, this.bounds.maxY); // right line
@@ -21,5 +22,7 @@ export default class Board {
 		this.renderer.line(this.bounds.maxX / 2 + 25, this.bounds.minY, this.bounds.maxX / 2 + 25, this.bounds.maxY);
 
 		this.renderer.circle(this.bounds.maxX / 2 + 25, this.bounds.maxY / 2 + 25, 25);
+
+		this.renderer.lineWidth(1);
 	}
 }
