@@ -46,8 +46,17 @@ export default class Game {
 		this.ball = new PlayerBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
 
 		this.paddles = [
-			new AIPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer, this.ball, 10, 10, false),
+			new PlayerPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer),
 			new AIPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer, this.ball, 10, difficulty)
+		];
+	}
+
+	createActorsForShow() {
+		this.ball = new PlayerBall(Bounds.maxX/2 + 25, Bounds.maxY/2 + 25, this.renderer);
+
+		this.paddles = [
+			new AIPaddle(Bounds.minX + 10, Bounds.maxY/2, this.renderer, this.ball, 10, 10, false),
+			new AIPaddle(Bounds.maxX - 20, Bounds.maxY/2, this.renderer, this.ball, 10, 10)
 		];
 	}
 }

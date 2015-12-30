@@ -21,10 +21,11 @@ export default class Menu {
 		this.renderer.text(20, 250, 'Pong', '140pt "Courier New"');
 
 		//Draw options
-		this.renderer.text(20, 430, 'Press 1 to start a game.', font);
-		this.renderer.text(20, 460, 'Press 2 to join a game.', font);
-		this.renderer.text(20, 490, 'Press 3 to exit game.', font);
-		this.renderer.text(20, 520, 'Press 4 to play with AI.', font);
+		this.renderer.text(20, 380, 'Press 1 to start a game.', font);
+		this.renderer.text(20, 410, 'Press 2 to join a game.', font);
+		this.renderer.text(20, 440, 'Press 3 to exit game.', font);
+		this.renderer.text(20, 470, 'Press 4 to play with AI.', font);
+		this.renderer.text(20, 500, 'Press 5 for a show.', font);
 			
 	}
 
@@ -33,12 +34,12 @@ export default class Menu {
 		this.createGame = options.createGameCb;
 		this.aiGame = options.startAIGameCb;
 		this.gameEnd = options.exitGameCb;
+		this.showGame = options.showGameCb;
 	}
 
 	register() {
 		userInput.addListener({ name: '1' }, () =>  {
-			this.deregister();
-			this.renderer.text(20, 550, 'Waiting for players to join.', 'italic 20pt Calibri');
+			this.renderer.text(20, 530, 'Waiting for players to join.', 'italic 20pt Calibri');
 			this.createGame();
 		}, 'up');
 
@@ -57,6 +58,8 @@ export default class Menu {
 				.prompt('AI Difficulty', 'Please choose AI difficulty (1 - 10).', '7')
 				.then((value) => this.aiGame(value), () => this.register());
 		}, 'up');
+
+		userInput.addListener({ name: '5' }, () => this.showGame(), 'up');
 	}
 
 	deregister() {
@@ -64,5 +67,6 @@ export default class Menu {
 		userInput.removeListener('2');
 		userInput.removeListener('3');
 		userInput.removeListener('4');
+		userInput.removeListener('5');
 	}
 }

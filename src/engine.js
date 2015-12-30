@@ -24,16 +24,18 @@ export default class Engine {
 		this.menu.onGameStart({
 			createGameCb: this.createGame.bind(this),
 			joinGameCb: this.joinGame.bind(this),
-			startAIGameCb: this.startAIGame.bind(this),
-			exitGameCb: this.endGame.bind(this)
+			startAIGameCb: (diff) => {
+				this.game.createActorsForAIGame(diff);
+				this.startGame();
+			},
+			exitGameCb: () => electron.ipcRenderer.send('exitApp'),
+			showGameCb: () => {
+				this.game.createActorsForShow();
+				this.startGame();
+			}
 		});
 
 		this.menu.render();
-	}
-
-	startAIGame(difficulty) {
-		this.game.createActorsForAIGame(difficulty);
-		this.startGame();
 	}
 
 	joinGame(ipAddress) {
@@ -73,7 +75,7 @@ export default class Engine {
 
 	endGame() {
 		// signal to the main process that we want to close the app.
-		electron.ipcRenderer.send('exitApp');
+		
 	}
 
 	tick() {
