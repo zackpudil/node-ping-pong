@@ -11,10 +11,10 @@ export default class NetworkBall extends Ball {
 			super.scored(playerWhoScored);
 		});
 
-		peer.onCommand('ballUpdate', (ball) => {
-			this.pos = ball.pos;
-			this.dir = ball.dir;
-			this.speed = ball.speed;
+		peer.onCommand('ballUpdate', (pos) => {
+			this.pos = pos;
 		});
 	}
+
+	update() { }
 }

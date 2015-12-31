@@ -26,11 +26,7 @@ export default class PlayerBall extends Ball {
 		super.update();
 
 		// send pos to the network ball.
-		peer.sendCommand('ballUpdate', {
-			pos: this.pos,
-			dir: this.dir,
-			speed: this.speed
-		});
+		peer.sendCommand('ballUpdate', this.pos);
 	}
 
 	collide(pos, width, height) {
