@@ -11,6 +11,8 @@ class UserInputCoordinator {
 		// A singleton instance
 		if(!instance) {
 			instance = this;
+
+			// differenciate between 'up' and 'down' inputHandlers.
 			document.onkeyup = (e) => this.handleInput(e, 'up');
 			document.onkeydown = (e) => this.handleInput(e, 'down');
 		}
@@ -19,10 +21,6 @@ class UserInputCoordinator {
 	}
 
 	handleInput(e, pressType) {
-		// if the app is expecting a string to be entered, don't run any handlers.
-		if(UserInputCoordinator.streamMode)
-			return;
-
 		let activatedListeners = inputHandlers.filter(l => {
 			return GameConstants.KeyMap[l.key.name] == e.keyCode
 				&& l.key.ctrl == e.ctrlKey

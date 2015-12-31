@@ -9,11 +9,13 @@ export default class NetworkPaddle {
 		this.scale = scale;
 
 		peer.onCommand('paddlePositionChange', (y) => {
+			// when ever the other paddle sends his/her's move updates over the write, we change it's position.
 			this.pos.y += y;
 		});
 	}
 
 	update() {
+		// Bounds checking.
 		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-(this.scale*6)), GameConstants.Bounds.minY + this.scale);
 	}
 

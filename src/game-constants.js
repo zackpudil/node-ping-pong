@@ -38,9 +38,12 @@ export default class GameConstants {
     return Bounds;
   }
   static resetBounds(boundsObj) {
+    // updates the global and singleton Bounds var with passed dimensions or window's dimensions.
     boundsObj = boundsObj || {};
     let maxHeight = boundsObj.height || window.innerHeight;
     let maxWidth = boundsObj.width || window.innerWidth;
+
+    // the offset is the padding between the game court and the end of window.
     let offset = 50;
     Bounds = { minX: 50, minY: 50, maxX: maxWidth - offset, maxY: maxHeight - offset };
   }

@@ -18,6 +18,7 @@ export default class Menu {
 		this.renderer.fillColor('#FFFFFF');
 		this.renderer.strokeColor('#FFFFFF');
 
+		// Draw title.
 		this.renderer.text(20, 250, 'Pong', '140pt "Courier New"');
 
 		//Draw options
@@ -45,6 +46,7 @@ export default class Menu {
 
 		userInput.addListener({ name: '2' }, () => {
 			this.deregister();
+			// need to get ip address.
 			smalltalk
 				.prompt('IPAddress', 'Please enter the ip address you wanna join.', 'localhost')
 				.then((value) => this.joinGame(value), () => this.register());
@@ -54,6 +56,7 @@ export default class Menu {
 
 		userInput.addListener({ name: '4' }, () => {
 			this.deregister();
+			// need to get difficulty
 			smalltalk
 				.prompt('AI Difficulty', 'Please choose AI difficulty (1 - 10).', '7')
 				.then((value) => this.aiGame(value), () => this.register());
