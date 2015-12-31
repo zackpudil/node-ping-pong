@@ -28,7 +28,7 @@ export default class PlayerBall {
 
 		//if the ball hits the right or left walls, then the ball needs to be reset, and the score calculated.
 		if(this.pos.x > GameConstants.Bounds.maxX-this.scale || this.pos.x < GameConstants.Bounds.minY) {
-			let sideThatScored = this.pos.x > GameConstants.Bounds.maxX-this.scale ? 'two' : 'one';
+			let sideThatScored = this.pos.x > GameConstants.Bounds.maxX-this.scale ? 'one' : 'two';
 			this.scored(sideThatScored);
 			this.reset();
 		}

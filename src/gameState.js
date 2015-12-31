@@ -21,6 +21,15 @@ class GameState {
 
   set score(player) {
     score[player] += 1;
+    if(score[player] >= 10)
+      state = GameConstants.GameStates.over;
+  }
+
+  get winningPlayerIndex()  {
+    if(score.one < score.two)
+      return 0;
+    else
+      return 1;
   }
 
   resetScore() {

@@ -9,8 +9,6 @@ export default class Menu {
 	constructor(renderer) {
 		this.renderer = renderer;
 		this.ipAddress = "";
-
-		this.register();
 	}
 
 	render() {
@@ -40,7 +38,11 @@ export default class Menu {
 
 	register() {
 		userInput.addListener({ name: '1' }, () =>  {
-			this.renderer.text(20, 530, 'Waiting for players to join.', 'italic 20pt Calibri');
+
+			require('dns').lookup(require('os').hostname(), (err, add, fam) => {
+				this.renderer.text(20, 530, `Waiting for players to join to ${add}.`, 'italic 20pt Calibri');
+			});
+
 			this.createGame();
 		}, 'up');
 

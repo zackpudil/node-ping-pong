@@ -4,6 +4,7 @@ import gameState from './gameState';
 
 import Menu from './actors/menu';
 import PauseMenu from './actors/pauseMenu';
+import GameOverMenu from './actors/gameOverMenu';
 
 import electron from 'electron';
 import peer from './peer';
@@ -38,6 +39,7 @@ export default class Engine {
 			}
 		});
 
+		this.menu.register();
 		this.menu.render();
 	}
 
@@ -71,11 +73,15 @@ export default class Engine {
 	}
 
 	startGame() {
+		this.menu.deregister();
 		// create the pause menu, change state of game, start game Loop.
 		this.pauseMenu = new PauseMenu(this.renderer, {
 			startGameCb: this.startGame.bind(this),
 			exitGameCb: () => electron.ipcRenderer.send('exitApp')
 		});
+		this.pauseMenu.register();
+
+		this.overMenu = new GameOverMenu(this.game, this.renderer);
 
 		gameState.state = GameConstants.GameStates.play;
 		this.menu.deregister();
@@ -88,8 +94,25 @@ export default class Engine {
 
 		// just render pause screen if game is paused.
 	 	if(gameState.state == GameConstants.GameStates.pause) {
+
 	 		this.pauseMenu.render();
+	 		
+	 	} else if(gameState.state == GameConstants.GameStates.over) {
+
+	 		this.pauseMenu.deregister();
+	 		this.overMenu.register();
+	 		this.overMenu.render();
+
+	 	} else if (gameState.state == GameConstants.GameStates.menu) {
+
+	 		clearInterval(this.gameLoop);
+	 		this.renderer.clear();
+	 		this.start();
+
 	 	} else if (gameState.state == GameConstants.GameStates.play) {
+	 		this.pauseMenu.register();
+	 		this.overMenu.deregister();
+
 			this.renderer.clear();
 
 	 		// update (if needed) and render all actors

@@ -22,6 +22,7 @@ export default class Renderer {
 	box(x, y, width, height) {
 		this.canvas.rect(x, y, width, height);
 		this.canvas.fill();
+		this.canvas.stroke();
 
 		this.canvas.beginPath();
 	}

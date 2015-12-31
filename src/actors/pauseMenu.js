@@ -12,22 +12,18 @@ export default class PauseMenu {
     this.gameStateChangeCb = options.startGameCb;
     this.endGameCb = options.exitGameCb;
 
-		userInput.addListener({ name: 'p' }, () =>  {
-			this.pauseGame()
-			peer.sendCommand('pause');
-		});
-
 		peer.onCommand('pause', () => this.pauseGame());
 	}
 
 	render() {
-		this.renderer.fillColor('#0497D7');
+		this.renderer.fillColor('#000000');
+		this.renderer.strokeColor('#FFFFFF');
 		this.renderer.box(150, 75, 450, 150);
 
 
 		//Draw options
-		this.renderer.fillColor('#D70404');
-		var font = 'italic 20pt Calibri';
+		this.renderer.fillColor('#FFFFFF');
+		var font = '20pt "Courier New"';
 		this.renderer.text(175, 100, "Press \'p\' to unpause.", font);
 		this.renderer.text(175, 140, 'Press \'e\' to exit game.', font)
 	}
@@ -35,11 +31,17 @@ export default class PauseMenu {
   pauseGame() {
     if (gameState.state == GameConstants.GameStates.play) {
       gameState.state = GameConstants.GameStates.pause;
+    	userInput.addListener({ name: 'e' }, () =>  this.endGameCb());
     } else {
       gameState.state = GameConstants.GameStates.play;
     }
+  }
 
-    userInput.addListener({ name: 'e' }, () =>  this.endGameCb());
+  register() {
+  	userInput.addListener({ name: 'p' }, () =>  {
+			this.pauseGame()
+			peer.sendCommand('pause');
+		});
   }
 
 	deregister() {

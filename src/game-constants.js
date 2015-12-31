@@ -1,7 +1,8 @@
 const GameStates = {
   menu: 'Menu',
   play: 'Play',
-  pause: 'Pause'
+  pause: 'Pause',
+  over: 'GameOver'
 };
 
 const Interval = 10;

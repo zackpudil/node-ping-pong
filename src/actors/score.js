@@ -23,6 +23,6 @@ export default class Score {
 
   getScore() {
     let score = gameState.score;
-    return score.two + ' : ' + score.one;
+    return score.one + ' : ' + score.two;
   }
 }
