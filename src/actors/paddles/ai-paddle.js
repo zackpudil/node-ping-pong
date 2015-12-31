@@ -1,20 +1,14 @@
-import ModelRenderer from '../../model-renderer';
 import GameConstants from '../../game-constants';
+import Paddle from './paddle';
 
-export default class AIPaddle {
-	constructor(x, y, render, ball, scale = 10, difficulty = 3, onRightSide = true) {
-		this.pos = { x: x, y: y };
-		this.scale = scale;
-		this.modelRenderer = new ModelRenderer(render);
+export default class AIPaddle extends Paddle {
+	constructor(x, y, renderer, ball, scale = 10, difficulty = 3, onRightSide = true) {
+		super(x, y, renderer, scale);
 
 		this.ball = ball;
 		this.maxTicks = 11 - Math.max(Math.min(difficulty, 11), 1);
 		this.ticks = 0;
 		this.onRightSide = onRightSide;
-	}
-
-	render() { 
-		this.modelRenderer.renderModel('paddle', this.pos, '#FFFFFF', this.scale);
 	}
 
 	update() {
@@ -39,7 +33,7 @@ export default class AIPaddle {
 		}
 
 		this.ticks = 0;
-		
-		this.pos.y = Math.max(Math.min(this.pos.y, GameConstants.Bounds.maxY-(this.scale*6)), GameConstants.Bounds.minY+this.scale);
+
+		super.update();
 	}
 }

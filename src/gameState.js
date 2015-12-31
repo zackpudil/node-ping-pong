@@ -21,7 +21,7 @@ class GameState {
 
   set score(player) {
     score[player] += 1;
-    if(score[player] >= 10)
+    if(score[player] >= 5)
       state = GameConstants.GameStates.over;
   }
 
