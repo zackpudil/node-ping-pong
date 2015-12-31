@@ -43,7 +43,7 @@ export default class PlayerBall {
 			this.pos.y < pos.y + height &&
 			this.pos.y + this.scale > pos.y) {
 
-			this.speed += 0.5;
+			this.speed = Math.min(this.speed+0.5, 15);
 			this.dir.x *= -1
 		}
 	}
