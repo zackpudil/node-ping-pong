@@ -18,14 +18,14 @@ export default class PauseMenu {
 	render() {
 		this.renderer.fillColor('#000000');
 		this.renderer.strokeColor('#FFFFFF');
-		this.renderer.box(150, 75, 450, 150);
+		this.renderer.box(150, 75, 550, 150);
 
 
 		//Draw options
 		this.renderer.fillColor('#FFFFFF');
 		var font = '20pt "Courier New"';
 		this.renderer.text(175, 100, "Press \'p\' to unpause.", font);
-		this.renderer.text(175, 140, 'Press \'e\' to exit game.', font)
+		this.renderer.text(175, 140, 'Press \'e\' to exit back to menu.', font)
 	}
 
   pauseGame() {

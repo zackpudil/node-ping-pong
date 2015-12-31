@@ -22,9 +22,10 @@ export default class Menu {
 		//Draw options
 		this.renderer.text(20, 380, 'Press 1 to start a game.', font);
 		this.renderer.text(20, 410, 'Press 2 to join a game.', font);
-		this.renderer.text(20, 440, 'Press 3 to exit game.', font);
-		this.renderer.text(20, 470, 'Press 4 to play with AI.', font);
-		this.renderer.text(20, 500, 'Press 5 for a show.', font);
+		this.renderer.text(20, 440, 'Press 3 to play with AI.', font);
+		this.renderer.text(20, 470, 'Press 4 for a show.', font);
+
+		this.renderer.text(20, 500, 'Press q to exit game.', font);
 			
 	}
 
@@ -54,9 +55,7 @@ export default class Menu {
 				.then((value) => this.joinGame(value), () => this.register());
 		}, 'up');
 
-		userInput.addListener({ name: '3' }, () => this.gameEnd(), 'up');
-
-		userInput.addListener({ name: '4' }, () => {
+		userInput.addListener({ name: '3' }, () => {
 			this.deregister();
 			// need to get difficulty
 			smalltalk
@@ -64,7 +63,9 @@ export default class Menu {
 				.then((value) => this.aiGame(value), () => this.register());
 		}, 'up');
 
-		userInput.addListener({ name: '5' }, () => this.showGame(), 'up');
+		userInput.addListener({ name: '4' }, () => this.showGame(), 'up');
+
+		userInput.addListener({ name: 'q' }, () => this.gameEnd(), 'up');
 	}
 
 	deregister() {

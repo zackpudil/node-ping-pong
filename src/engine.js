@@ -77,7 +77,7 @@ export default class Engine {
 		// create the pause menu, change state of game, start game Loop.
 		this.pauseMenu = new PauseMenu(this.renderer, {
 			startGameCb: this.startGame.bind(this),
-			exitGameCb: () => electron.ipcRenderer.send('exitApp')
+			exitGameCb: () => gameState.state = GameConstants.GameStates.menu
 		});
 		this.pauseMenu.register();
 
