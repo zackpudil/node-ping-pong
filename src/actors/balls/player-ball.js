@@ -45,6 +45,11 @@ export default class PlayerBall {
 
 			this.speed = Math.min(this.speed+0.5, 15);
 			this.dir.x *= -1
+
+			if(this.pos.x < GameConstants.Bounds.maxY)
+					this.pos.x += 10;
+			else
+					this.pos.x -= 10;
 		}
 	}
 
