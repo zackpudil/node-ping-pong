@@ -1,23 +1,13 @@
-import ModelRenderer from '../../model-renderer';
 import GameConstants from '../../game-constants';
 import gameState from '../../gameState';
 import peer from '../../peer';
 
-export default class PlayerBall {
+import Ball from './ball';
+
+export default class PlayerBall extends Ball {
 
 	constructor(x, y, renderer, scale = 10) {
-		this.modelRenderer = new ModelRenderer(renderer);
-
-		this.startPos = { x: x, y: y };
-		this.pos = { x: x, y: y };
-		this.dir = { x: -1, y: -1 };
-		this.speed = 1.5;
-
-		this.scale = scale;
-	}
-
-	render() {
-		this.modelRenderer.renderModel("ball", this.pos, '#FFFFFF', this.scale)
+		super(x, y, renderer, scale);
 	}
 
 	update() {
@@ -33,21 +23,19 @@ export default class PlayerBall {
 			this.reset();
 		}
 
-		// position += direction * speed
-		// direction*speed = velocity
-		this.pos.x += this.dir.x*this.speed;
-		this.pos.y += this.dir.y*this.speed;
+		super.update();
 
 		// send pos to the network ball.
-		peer.sendCommand('ballPositionChange', this.pos);
+		peer.sendCommand('ballUpdate', {
+			pos: this.pos,
+			dir: this.dir,
+			speed: this.speed
+		});
 	}
 
 	collide(pos, width, height) {
 		//  AABB collision detection.
-		if(this.pos.x < pos.x + width &&
-			this.pos.x + this.scale > pos.x &&
-			this.pos.y < pos.y + height &&
-			this.pos.y + this.scale > pos.y) {
+		if(super.collide(pos, width, height)) {
 
 			this.speed = Math.min(this.speed+0.5, 15);
 			this.dir.x *= -1
@@ -69,7 +57,7 @@ export default class PlayerBall {
 	}
 
 	scored(sideThatScored) {
-		gameState.score = sideThatScored;
+		super.scored(sideThatScored);
 		peer.sendCommand('scored', sideThatScored);
 	}
 }

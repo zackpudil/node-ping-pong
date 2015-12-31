@@ -1,35 +1,20 @@
-import ModelRenderer from '../../model-renderer';
 import peer from '../../peer';
-import gameState from '../../gameState';
+import Ball from './ball';
 
-export default class NetworkBall {
+export default class NetworkBall extends Ball {
 
 	constructor(x, y, renderer, scale = 10) {
-		this.modelRenderer = new ModelRenderer(renderer);
-		this.startX = x;
 
-		this.pos = { x: x, y: y };
-
-		this.scale = scale;
+		super(x, y, renderer, scale);
 
 		peer.onCommand('scored', (playerWhoScored) => {
-			this.scored(playerWhoScored);
+			super.scored(playerWhoScored);
 		});
 
-		peer.onCommand('ballPositionChange', (pos) => {
-			this.pos = pos;
+		peer.onCommand('ballUpdate', (ball) => {
+			this.pos = ball.pos;
+			this.dir = ball.dir;
+			this.speed = ball.speed;
 		});
-	}
-
-	render() {
-		this.modelRenderer.renderModel("ball", this.pos, '#FFFFFF', this.scale)
-	}
-
-	update() { }
-
-	collide(pos, width, height) { }
-
-	scored(sideThatScored) {
-		gameState.score = sideThatScored;
 	}
 }
