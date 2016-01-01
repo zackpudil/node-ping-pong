@@ -52,6 +52,10 @@ class UserInputCoordinator {
 			inputHandlers.splice(inputListenerIndex, 1);
 		}
 	}
+
+	clearListeners() {
+		inputHandlers = [];
+	}
 }
 
 var inputCoordinator = new UserInputCoordinator();
