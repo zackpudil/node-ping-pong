@@ -8,14 +8,29 @@ export default class PlayerPaddle extends Paddle {
 	constructor(x, y, renderer, scale = 10, keyMaps = { up: 'up', down: 'down'}) {
 		super(x, y, renderer, scale);
 
-		userInput.addListener({ name: keyMaps.up, ctrl: false, shift: false }, () => {
-			this.pos.y -= 40;
-			peer.sendCommand('paddlePositionChange', -40);
-		});
+		this.upKeyisDown = false;
+		this.downKeyisDown = false;
 
-		userInput.addListener({ name: keyMaps.down, ctrl: false, shift: false }, () => {
-			this.pos.y += 40;
-			peer.sendCommand('paddlePositionChange', 40);
-		});
+		userInput.addListener({ name: keyMaps.up }, () => this.upKeyisDown = true);
+		userInput.addListener({ name: keyMaps.up }, () => this.upKeyisDown = false, 'up')
+
+		userInput.addListener({ name: keyMaps.down }, () => this.downKeyisDown = true);
+		userInput.addListener({ name: keyMaps.down }, () => this.downKeyisDown = false, 'up');
+	}
+
+	update() {
+		var displacement = 0;
+
+		if(this.upKeyisDown)
+			displacement = -5;
+		else if(this.downKeyisDown)
+			displacement = 5;
+
+		this.pos.y += displacement;
+
+		if(displacement !== 0)
+			peer.sendCommand('paddlePositionChange', displacement);
+
+		super.update();
 	}
 }
