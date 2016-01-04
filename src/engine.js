@@ -22,6 +22,7 @@ export default class Engine {
 	}
 
 	start() {
+		gameState.resetScore();
 		userInput.clearListeners();
 		// start is called first.  It creates and shows the menu.
 		this.menu.onGameStart({

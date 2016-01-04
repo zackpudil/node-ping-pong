@@ -65,7 +65,6 @@ export default class GameOverMenu {
 	}
 
 	playAgain() {
-		this.isWaiting = false;
 		gameState.resetScore();
 		gameState.state = gameConstants.GameStates.play;
 		this.game.ball.reset();
