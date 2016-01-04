@@ -2,6 +2,7 @@
 	"name": "pong",
 	"productName": "Pong",
 	"main": "main.js",
+	"version": "v1.0",
 	"dependencies": {
     "json-socket": "^0.1.2",
     "minimist": "^1.2.0",
