@@ -8,6 +8,10 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zackpudil/node-ping-pong.git"
+  },
   "dependencies": {
     "electron-debug": "^0.5.1",
     "electron-prebuilt": "^0.36.1",
