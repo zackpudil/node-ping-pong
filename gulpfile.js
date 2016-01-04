@@ -30,7 +30,7 @@ gulp.task("package", ["build", "app-install"], function() {
 			version: 'v0.36.2',
 			release: './release',
 			cache: './cache',
-			packaging: false,
+			packaging: true,
 			platforms: ['darwin-x64', 'win32-ia32'],
 			platformResources: {
 				darwin: {
