@@ -29,7 +29,7 @@ export default class PlayerPaddle extends Paddle {
 		this.pos.y += displacement;
 
 		if(displacement !== 0)
-			peer.sendCommand('paddlePositionChange', displacement);
+			peer.sendCommand('paddlePositionChange', this.pos);
 
 		super.update();
 	}
