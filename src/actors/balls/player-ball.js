@@ -33,7 +33,7 @@ export default class PlayerBall extends Ball {
 		//  AABB collision detection.
 		if(super.collide(pos, width, height)) {
 
-			this.speed = Math.min(this.speed+0.5, 15);
+			this.speed = Math.min(this.speed+0.5, 10);
 			this.dir.x *= -1
 
 			// push ball out of collision before next collision check.

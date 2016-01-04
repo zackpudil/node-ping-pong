@@ -8,8 +8,6 @@ import NetworkPaddle from './actors/paddles/network-paddle';
 import gameConstants from './game-constants';
 import peer from './peer';
 
-
-
 export default class Game {
 
 	constructor(renderer) {
