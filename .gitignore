@@ -1,3 +1,5 @@
 node_modules/
-dist/
+build/dist/
+build/cache/
+build/release/
 npm-debug.log
