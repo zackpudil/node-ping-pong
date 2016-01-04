@@ -1,0 +1,10 @@
+{
+	"name": "pong",
+	"productName": "Pong",
+	"main": "main.js",
+	"dependencies": {
+    "json-socket": "^0.1.2",
+    "minimist": "^1.2.0",
+    "smalltalk": "^1.6.4"
+  }
+}

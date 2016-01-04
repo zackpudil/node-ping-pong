@@ -1,5 +1,6 @@
 node_modules/
+app/node_modules/
 app/dist/
-app/cache/
-app/release/
+cache/
+release/
 npm-debug.log

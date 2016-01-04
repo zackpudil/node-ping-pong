@@ -20,20 +20,16 @@
 			context = canvas.getContext('2d');
 
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+		function resizeCanvas() {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
 			canvas.style.backgroundColor = '#000000';
-    }
+		}
     
-    resizeCanvas();
+		resizeCanvas();
 
-		var pp = require("./dist/app");
-		pp.default(context);
-
+		require('./dist/app').default(context);
 		window.addEventListener('resize', resizeCanvas, false);
-
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
+		
 	</script>
 </html>

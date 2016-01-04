@@ -1,5 +1,7 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
+var browserify = require("gulp-browserify");
+var install = require("gulp-install");
 var electron = require("gulp-electron");
 
 gulp.task("build", function () {
@@ -14,33 +16,36 @@ gulp.task("default", ["build"], function () {
 	gulp.watch('src/**/*.js', ['build']);
 });
 
-var packageJson = require('./package.json');
+gulp.task("app-install", function () {
+	gulp
+		.src('./app/package.json')
+		.pipe(install());
+});
 
-gulp.task("package", ["build"], function () {
+gulp.task("package", ["build", "app-install"], function() {
+	var packageJson = require('./app/package.json');
 	gulp.src("")
 		.pipe(electron({
 			src: './app',
 			packageJson: packageJson,
-			release: './app/release',
-			cache: './app/cache',
-			version: 'v1.0.0',
-			packaging: true,
-			platforms: ['darwin-x64', 'win32'],
+			version: 'v0.36.2',
+			release: './release',
+			cache: './cache',
+			packaging: false,
+			platforms: ['darwin-x64', 'win32-ia32'],
 			platformResources: {
 				darwin: {
-					CFBundleDisplayName: packageJson.name,
-					CFBUndleIdentifier: packageJson.name,
-					CFBundleName: packageJson.name,
-					CFBundleVersion: packageJson.name,
-					icon: 'gulp-electron.icns'
-				},
-				win: {
-					"version-string": packageJson.version,
-					"file-version": packageJson.version,
-					"product-version": packageJson.version,
-					"icon": "gulp-electron.ico"
-				}
+            CFBundleDisplayName: packageJson.name,
+            CFBundleIdentifier: packageJson.name,
+            CFBundleName: packageJson.name,
+            CFBundleVersion: packageJson.version
+        },
+        win: {
+            "version-string": packageJson.version,
+            "file-version": packageJson.version,
+            "product-version": packageJson.version
+        }
 			}
-			}))
-			.pipe(gulp.dest(""));
-})
+		}))
+		.pipe(gulp.dest(""));
+});

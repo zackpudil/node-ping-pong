@@ -1,8 +1,9 @@
 {
   "name": "node-ping-pong",
+  "productName": "Node Pong",
   "version": "0.0.1",
   "description": "A multiplayer ping-pong game written with Node.js",
-  "main": "./build/main.js",
+  "main": "./app/main.js",
   "scripts": {
     "start": "electron ./app/main.js"
   },
@@ -13,17 +14,17 @@
     "url": "https://github.com/zackpudil/node-ping-pong.git"
   },
   "dependencies": {
-    "electron-debug": "^0.5.1",
-    "electron-prebuilt": "^0.36.1",
     "json-socket": "^0.1.2",
-    "keypress": "^0.2.1",
     "minimist": "^1.2.0",
     "smalltalk": "^1.6.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
+    "electron-debug": "^0.5.1",
+    "electron-prebuilt": "^0.36.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
-    "gulp-electron": "0.0.10"
+    "gulp-electron": "0.0.10",
+    "gulp-install": "^0.6.0"
   }
 }
