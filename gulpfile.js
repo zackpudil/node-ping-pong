@@ -34,16 +34,16 @@ gulp.task("package", ["build", "app-install"], function() {
 			platforms: ['darwin-x64', 'win32-ia32'],
 			platformResources: {
 				darwin: {
-            CFBundleDisplayName: packageJson.name,
-            CFBundleIdentifier: packageJson.name,
-            CFBundleName: packageJson.name,
-            CFBundleVersion: packageJson.version
-        },
-        win: {
-            "version-string": packageJson.version,
-            "file-version": packageJson.version,
-            "product-version": packageJson.version
-        }
+					CFBundleDisplayName: packageJson.name,
+					CFBundleIdentifier: packageJson.name,
+					CFBundleName: packageJson.name,
+					CFBundleVersion: packageJson.version
+				},
+				win: {
+					"version-string": packageJson.version,
+					"file-version": packageJson.version,
+					"product-version": packageJson.version
+				}
 			}
 		}))
 		.pipe(gulp.dest(""));
