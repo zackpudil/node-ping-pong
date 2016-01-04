@@ -1,6 +1,5 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
-var browserify = require("gulp-browserify");
 var install = require("gulp-install");
 var electron = require("gulp-electron");
 
