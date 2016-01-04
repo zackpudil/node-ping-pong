@@ -6,9 +6,9 @@ export default class NetworkPaddle extends Paddle {
 	constructor(x, y, renderer, scale = 10) {
 		super(x, y, renderer, scale);
 
-		peer.onCommand('paddlePositionChange', (y) => {
+		peer.onCommand('paddlePositionChange', (pos) => {
 			// when ever the other paddle sends his/her's move updates over the write, we change it's position.
-			this.pos.y += y;
+			this.pos = pos;
 		});
 	}
 }
